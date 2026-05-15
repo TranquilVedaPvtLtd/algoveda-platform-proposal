@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Statement of Work - AlgoVeda Platform | Jarvis Daily</title>
+<title>Statement of Work - AlgoVeda Dashboard | Jarvis Daily</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -66,7 +66,7 @@
   <div class="header">
     <div>
       <h1>Jarvis Daily</h1>
-      <div class="tagline">Tranquil Veda Private Limited</div>
+      <div class="tagline">Tranquil Veda Private Limited · AlgoVeda Dashboard</div>
     </div>
     <div class="doc-type">
       <h2>Statement of Work</h2>
@@ -76,7 +76,7 @@
 
   <div class="meta-strip">
     <div class="item"><div class="label">Client</div><div class="value">Vinayak Sanas</div></div>
-    <div class="item"><div class="label">Engagement</div><div class="value">AlgoVeda Platform</div></div>
+    <div class="item"><div class="label">Engagement</div><div class="value">AlgoVeda Dashboard</div></div>
     <div class="item"><div class="label">Effective Date</div><div class="value">On signature</div></div>
     <div class="item"><div class="label">Valid Until</div><div class="value">29 May 2026</div></div>
   </div>
@@ -96,7 +96,7 @@
     <div class="section">
       <div class="section-num">Section 2</div>
       <h2>Engagement</h2>
-      <p>Jarvis Daily will design, build, deploy, and maintain a custom software platform ("AlgoVeda Platform" or "Platform") that connects to Zerodha Kite Connect for algorithmic order management. The Platform replaces the Client's current use of Tradetron as the execution layer. The Client retains full operational and trading control. Jarvis Daily is the software vendor; the Client is the operator.</p>
+      <p>Jarvis Daily will design, build, deploy, and maintain a custom dashboard and execution module ("AlgoVeda Dashboard" or "Platform") that mirrors the Client's Zerodha account activity across multiple configurations and implements the Client's specified R1 to R4 execution logic via Zerodha Kite Connect. This engagement covers the Client's specific requirements (dashboard, execution module, daily token utility, quantity multiplier, real-time parameter editor); it does not replace the Client's existing Tradetron setup, which the Client may continue to run as desired. The Client retains full operational and trading control. Jarvis Daily is the software vendor; the Client is the operator.</p>
     </div>
 
     <!-- 3. Deliverables -->
@@ -108,8 +108,8 @@
       <p>Web application providing a per-configuration view (positions, P&amp;L, active strategies, pending orders, today's trades) plus a cross-configuration aggregated view. Tab navigation between active configurations. Real-time updates via WebSocket subscription to the backend.</p>
       <p><em>Acceptance:</em> Dashboard renders 5 configurations on staging with live tick data from Kite Connect for 1 trading session without crashes or data loss.</p>
 
-      <h3>3.2 Native Strategy Engine</h3>
-      <p>Python engine that hosts 4 to 5 strategies natively. Strategies include the Client's existing Natural Gas (MCX) configuration with 27 sets, ported from the prior R1-R4 OMS engagement. Each strategy supports multiple independent sets with per-set entry and exit conditions.</p>
+      <h3>3.2 R1-R4 Execution Module</h3>
+      <p>Python execution module that implements the Client's specified R1 to R4 logic for the 4 to 5 strategies in scope, including the existing Natural Gas (MCX) configuration with 27 sets, refactored from the prior R1-R4 OMS engagement. Each strategy supports multiple independent sets with per-set entry and exit conditions.</p>
       <p><em>Acceptance:</em> Natural Gas strategy executes correctly on paper trading for 2 consecutive trading days with no manual intervention.</p>
 
       <h3>3.3 Daily Token Automation</h3>
