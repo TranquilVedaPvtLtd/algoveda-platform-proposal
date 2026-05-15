@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Statement of Work - AlgoVeda Platform | Jarvis Daily</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #1A2535; background: #fff; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 920px; margin: 0 auto; padding: 40px; }
+
+  .header { background: linear-gradient(135deg, #C49A2A 0%, #A07D1C 100%); color: #fff; padding: 36px 40px; display: flex; justify-content: space-between; align-items: start; border-radius: 8px 8px 0 0; }
+  .header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+  .header .tagline { font-size: 13px; opacity: 0.9; margin-top: 2px; }
+  .header .doc-type { text-align: right; }
+  .header .doc-type h2 { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+  .header .doc-type p { font-size: 12px; opacity: 0.9; margin-top: 3px; }
+
+  .meta-strip { background: #FDFAF3; padding: 18px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; border-bottom: 1px solid #E8DCC4; }
+  .meta-strip .item .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #999; margin-bottom: 4px; }
+  .meta-strip .item .value { font-size: 13px; font-weight: 600; color: #1A2535; }
+
+  .body { padding: 40px; }
+  .section { margin: 2.2rem 0; }
+  .section-num { font-size: 11px; font-weight: 700; color: #C49A2A; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .section h2 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #1A2535; }
+  .section h3 { font-size: 15px; font-weight: 700; margin: 1.25rem 0 0.5rem; color: #1A2535; }
+  .section p, .section li { font-size: 14px; color: #4A5568; }
+  .section ul, .section ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+  .section li { margin-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 13px; }
+  thead { background: #FBF7EE; }
+  th { text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #666; font-weight: 700; border-bottom: 2px solid #E8DCC4; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; color: #4A5568; vertical-align: top; }
+
+  .payment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .payment-card { background: #FDFAF3; border: 1px solid #E8DCC4; border-radius: 8px; padding: 1.25rem; text-align: center; }
+  .payment-pct { font-size: 12px; font-weight: 700; color: #C49A2A; margin-bottom: 4px; }
+  .payment-amt { font-size: 20px; font-weight: 800; color: #1A2535; }
+  .payment-gst { font-size: 11px; color: #999; margin-top: 2px; }
+  .payment-when { font-size: 11px; color: #666; margin-top: 8px; line-height: 1.5; }
+
+  .note-card { background: #F8FAFC; border-left: 3px solid #C49A2A; border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .note-card strong { font-size: 13px; color: #1A2535; }
+  .note-card p { font-size: 13px; color: #4A5568; margin-top: 4px; }
+
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; }
+  .sig-block { border: 1px solid #E8DCC4; border-radius: 8px; padding: 1.5rem; }
+  .sig-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #999; margin-bottom: 8px; }
+  .sig-name { font-size: 16px; font-weight: 700; color: #C49A2A; margin-bottom: 4px; }
+  .sig-detail { font-size: 12px; color: #666; line-height: 1.8; }
+  .sig-line { border-top: 1px solid #ccc; margin-top: 2rem; padding-top: 6px; font-size: 11px; color: #999; }
+
+  .footer { text-align: center; padding: 2rem 0; font-size: 11px; color: #999; border-top: 1px solid #eee; margin-top: 2rem; }
+
+  @media print { body { padding: 0; } .page { padding: 0; } .header { border-radius: 0; } }
+  @media (max-width: 600px) { .payment-grid { grid-template-columns: 1fr; } .sig-grid { grid-template-columns: 1fr; } .header { flex-direction: column; gap: 1rem; } .meta-strip { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div>
+      <h1>Jarvis Daily</h1>
+      <div class="tagline">Tranquil Veda Private Limited</div>
+    </div>
+    <div class="doc-type">
+      <h2>Statement of Work</h2>
+      <p>SOW-VIN-001 · Rev 1.0 · 15 May 2026</p>
+    </div>
+  </div>
+
+  <div class="meta-strip">
+    <div class="item"><div class="label">Client</div><div class="value">Vinayak Sanas</div></div>
+    <div class="item"><div class="label">Engagement</div><div class="value">AlgoVeda Platform</div></div>
+    <div class="item"><div class="label">Effective Date</div><div class="value">On signature</div></div>
+    <div class="item"><div class="label">Valid Until</div><div class="value">29 May 2026</div></div>
+  </div>
+
+  <div class="body">
+
+    <!-- 1. Parties -->
+    <div class="section">
+      <div class="section-num">Section 1</div>
+      <h2>Parties</h2>
+      <p>This Statement of Work ("SOW") is entered into between:</p>
+      <p style="margin-top: 10px;"><strong>Tranquil Veda Private Limited</strong> (operating as "Jarvis Daily"), a company incorporated in India, GSTIN 27AAHCT6956C1Z3, with registered office in Pune, Maharashtra ("Jarvis Daily" or "we"), and</p>
+      <p style="margin-top: 10px;"><strong>Vinayak Sanas</strong>, an individual ("Client" or "you"), whose details will be captured on the signature page.</p>
+    </div>
+
+    <!-- 2. Engagement -->
+    <div class="section">
+      <div class="section-num">Section 2</div>
+      <h2>Engagement</h2>
+      <p>Jarvis Daily will design, build, deploy, and maintain a custom software platform ("AlgoVeda Platform" or "Platform") that connects to Zerodha Kite Connect for algorithmic order management. The Platform replaces the Client's current use of Tradetron as the execution layer. The Client retains full operational and trading control. Jarvis Daily is the software vendor; the Client is the operator.</p>
+    </div>
+
+    <!-- 3. Deliverables -->
+    <div class="section">
+      <div class="section-num">Section 3</div>
+      <h2>Deliverables</h2>
+
+      <h3>3.1 Central Command Dashboard</h3>
+      <p>Web application providing a per-configuration view (positions, P&amp;L, active strategies, pending orders, today's trades) plus a cross-configuration aggregated view. Tab navigation between active configurations. Real-time updates via WebSocket subscription to the backend.</p>
+      <p><em>Acceptance:</em> Dashboard renders 5 configurations on staging with live tick data from Kite Connect for 1 trading session without crashes or data loss.</p>
+
+      <h3>3.2 Native Strategy Engine</h3>
+      <p>Python engine that hosts 4 to 5 strategies natively. Strategies include the Client's existing Natural Gas (MCX) configuration with 27 sets, ported from the prior R1-R4 OMS engagement. Each strategy supports multiple independent sets with per-set entry and exit conditions.</p>
+      <p><em>Acceptance:</em> Natural Gas strategy executes correctly on paper trading for 2 consecutive trading days with no manual intervention.</p>
+
+      <h3>3.3 Daily Token Automation</h3>
+      <p>Per-configuration Kite Connect access token refresh worker scheduled before 9:15 IST daily. Telegram alert on success and failure. The Client's nominated ops lead (Bhopesh) runs day-to-day token operations; Jarvis Daily provides the worker, the alerting, and platform-level fixes only.</p>
+      <p><em>Acceptance:</em> Token refresh worker runs successfully for 5 configurations across 3 consecutive trading days.</p>
+
+      <h3>3.4 Smart Execution Layer (R1-R4)</h3>
+      <p>R1 Smart Entry (30-minute limit-fill window with partial-fill tracking and timeout fallback), R2 Instant Exit (sub-2-second market order on exit signal), R3 Partial Exits (tranche-based profit booking with configurable milestones), R4 Averaging Down (additional entries at better prices with configurable level caps). All R1-R4 logic is configurable per strategy.</p>
+      <p><em>Acceptance:</em> Each of R1, R2, R3, R4 demonstrably fires on paper trading account against the Natural Gas strategy in line with configured thresholds.</p>
+
+      <h3>3.5 Quantity Multiplier UI</h3>
+      <p>Single slider in the dashboard that scales base quantity across active configurations in real time. Per-configuration absolute caps enforced server-side. Confirmation modal triggers above 1.5x. Values above 2x require a separate explicit unlock setting.</p>
+      <p><em>Acceptance:</em> Multiplier changes propagate to active strategies within 5 seconds; hard caps prevent any order above configured per-configuration limits.</p>
+
+      <h3>3.6 Real-Time Parameter Editor</h3>
+      <p>UI to modify entry threshold, target, stop loss, and quantity parameters for any active strategy. Param changes take effect on the next signal evaluation. Changes logged to an append-only audit trail. 30-second confirmation cool-off on save.</p>
+      <p><em>Acceptance:</em> Parameter changes propagate to running strategy within next evaluation cycle; audit trail captures every change with timestamp, user, before-value, after-value.</p>
+
+      <h3>3.7 Audit Trail, Alerts, Kill Switch</h3>
+      <p>Every order logged with reason, signal, price, fill status, and timestamp. Telegram alerts for: order rejections, failed token refresh, kill switch fires, margin shortfalls. One-click kill switch cancels all pending orders across configurations (does not auto-close existing positions).</p>
+      <p><em>Acceptance:</em> Audit log captures 100% of order events across a 2-day paper-trade run; kill switch tested end-to-end.</p>
+
+      <h3>3.8 Mumbai VPS Deployment with Static IP</h3>
+      <p>Production deployment on Mumbai-located VPS with static IP registered against the Client's Kite Connect application per Zerodha's April 2025 requirement. SSL termination, NGINX reverse proxy, systemd service supervision, structured logging with rotation.</p>
+      <p><em>Acceptance:</em> Platform reachable on production URL with valid SSL, services restart automatically on reboot, logs accessible to Client.</p>
+
+      <h3>3.9 Handover Pack</h3>
+      <p>At go-live: private GitHub repository invite, credentials vault transfer, runbook PDF, 2-hour live handover call with the Client's ops lead.</p>
+      <p><em>Acceptance:</em> Handover call completed, repo access confirmed, runbook delivered.</p>
+
+      <div class="note-card">
+        <strong>Build duration:</strong>
+        <p>5 to 6 weeks build + 2 weeks hardening and paper-trade UAT from kickoff. Target go-live: 15 July 2026.</p>
+      </div>
+    </div>
+
+    <!-- 4. Exclusions -->
+    <div class="section">
+      <div class="section-num">Section 4</div>
+      <h2>Exclusions</h2>
+      <ul>
+        <li>Day-to-day token rotation, configuration onboarding, and operational monitoring (Client's scope, performed by Bhopesh).</li>
+        <li>Zerodha Kite Connect subscription fees (~Rs 500/month per API key, billed by Zerodha to the Client).</li>
+        <li>VPS hosting costs (~Rs 3,000 to 4,000/month, billed at cost; no markup by Jarvis Daily).</li>
+        <li>New strategies beyond the initial 4 to 5 strategies in scope. Each additional strategy is a separate add-on at Rs 40,000 + GST.</li>
+        <li>Trading strategy design, financial advice, or any recommendation regarding instruments, timing, or position sizing.</li>
+        <li>Regulatory registrations or filings of any kind (SEBI, exchange empanelment, Research Analyst, Portfolio Manager).</li>
+        <li>Recovery of trading losses or compensation for missed trades, regardless of cause.</li>
+      </ul>
+    </div>
+
+    <!-- 5. Pricing & Payment Schedule -->
+    <div class="section">
+      <div class="section-num">Section 5</div>
+      <h2>Pricing and Payment Schedule</h2>
+
+      <h3>5.1 Setup Fee</h3>
+      <p>Rs 1,75,000 + 18% GST (Rs 31,500) = Rs 2,06,500 total invoice value. Payable in 2 tranches:</p>
+
+      <div class="payment-grid">
+        <div class="payment-card">
+          <div class="payment-pct">Tranche 1</div>
+          <div class="payment-amt">Rs 87,500</div>
+          <div class="payment-gst">+ Rs 15,750 GST = Rs 1,03,250</div>
+          <div class="payment-when">On SOW signature<br>Invoice JAR-VIN-001<br>7-day payment terms</div>
+        </div>
+        <div class="payment-card">
+          <div class="payment-pct">Tranche 2</div>
+          <div class="payment-amt">Rs 87,500</div>
+          <div class="payment-gst">+ Rs 15,750 GST = Rs 1,03,250</div>
+          <div class="payment-when">At kickoff (Week 1)<br>Invoice JAR-VIN-002<br>7-day payment terms</div>
+        </div>
+        <div class="payment-card">
+          <div class="payment-pct">Monthly Retainer</div>
+          <div class="payment-amt">Rs 15,000</div>
+          <div class="payment-gst">+ Rs 2,700 GST = Rs 17,700</div>
+          <div class="payment-when">Billed in advance on 1st of each month<br>Starts on go-live month<br>7-day payment terms</div>
+        </div>
+      </div>
+
+      <h3>5.2 GST</h3>
+      <p>9% CGST + 9% SGST applies (same-state, Maharashtra to Maharashtra). SAC code 998314. If the Client's billing address is outside Maharashtra at the time of invoicing, 18% IGST applies in lieu of CGST+SGST.</p>
+
+      <h3>5.3 TDS</h3>
+      <p>The Client may deduct TDS at 2% u/s 194C or 10% u/s 194J of the Income Tax Act 1961 as applicable. Form 16A required quarterly. TDS-deducted amounts will be reconciled against the Client's PAN.</p>
+
+      <h3>5.4 Late Fee</h3>
+      <p>1.5% per month on any overdue amount. Service may be paused after 15 days of overdue payment with 48-hour written notice.</p>
+    </div>
+
+    <!-- 6. Monthly Retainer Scope -->
+    <div class="section">
+      <div class="section-num">Section 6</div>
+      <h2>Monthly Retainer Scope</h2>
+      <p>The Rs 15,000/month retainer covers:</p>
+      <ul>
+        <li>Platform-level monitoring and uptime alerting during market hours.</li>
+        <li>Incident response for platform faults (target acknowledgement within 30 minutes during market hours; resolution within 4 hours for severity-1 incidents).</li>
+        <li>Minor parameter tuning, threshold adjustments, and bug fixes (up to 8 hours per month, cumulative).</li>
+        <li>Patches for Zerodha Kite API changes, library updates, security advisories.</li>
+        <li>Monthly health report summarising uptime, incidents, and any flagged anomalies.</li>
+      </ul>
+      <p style="margin-top: 12px;">Out of scope at retainer pricing: new strategies, major architectural changes, additional configuration onboarding logic, training of the Client's team beyond initial handover. These are scoped and quoted separately.</p>
+    </div>
+
+    <!-- 7. Change Requests -->
+    <div class="section">
+      <div class="section-num">Section 7</div>
+      <h2>Change Request Process</h2>
+      <ol>
+        <li>Client submits a written change request describing the desired change.</li>
+        <li>Jarvis Daily provides an impact estimate (hours, cost, schedule impact) within 5 business days.</li>
+        <li>Client signs off on the estimate before work begins.</li>
+        <li>Out-of-scope hours billed at Rs 2,500/hour + GST.</li>
+        <li>2 rounds of revisions included per major deliverable; additional rounds at hourly rate.</li>
+        <li>Deemed acceptance: 7 business days of silence from the Client on a delivered acceptance request constitutes acceptance.</li>
+      </ol>
+    </div>
+
+    <!-- 8. Client Compliance Representation -->
+    <div class="section">
+      <div class="section-num">Section 8</div>
+      <h2>Client Compliance Representation</h2>
+      <p>The Client represents and warrants that:</p>
+      <ol>
+        <li>The Client and any end-users of the Platform hold all regulatory authorisations, registrations, certifications, and consents required under applicable Indian law (including without limitation SEBI regulations, exchange rules, and broker terms of service) for their intended use of the Platform.</li>
+        <li>All trading decisions, strategy logic, instrument selection, position sizing, and account configuration choices are the sole responsibility of the Client.</li>
+        <li>The Client will obtain and maintain in good standing all required authorisations for the duration of the engagement.</li>
+        <li>The Client is solely responsible for the relationship between the Client and any third-party account holders for whom the Client may operate the Platform.</li>
+        <li>The Client will promptly notify Jarvis Daily of any communication received from SEBI, NSE, BSE, MCX, Zerodha, or any regulatory authority concerning the Platform or the Client's use of it.</li>
+      </ol>
+    </div>
+
+    <!-- 9. Software Vendor Framing -->
+    <div class="section">
+      <div class="section-num">Section 9</div>
+      <h2>Nature of Engagement</h2>
+      <p>Jarvis Daily is engaged as a software vendor only. Jarvis Daily:</p>
+      <ol>
+        <li>Does not provide investment advice, trading recommendations, portfolio management, or any service that constitutes "investment advisory" or "research analyst" services under SEBI regulations.</li>
+        <li>Does not take discretion over the Client's or any third party's accounts. All orders are placed at the direction of the Client through the Client's configured strategies.</li>
+        <li>Does not represent or warrant any specific trading outcome, P&amp;L result, win rate, or capital preservation.</li>
+        <li>Provides software that executes the Client's pre-defined logic. The Client owns the trading; Jarvis Daily owns the software.</li>
+      </ol>
+    </div>
+
+    <!-- 10. Indemnification -->
+    <div class="section">
+      <div class="section-num">Section 10</div>
+      <h2>Indemnification</h2>
+      <p>The Client agrees to indemnify, defend, and hold harmless Jarvis Daily, Tranquil Veda Private Limited, and its directors, officers, employees, and affiliates from and against any and all claims, demands, actions, losses, damages, costs (including reasonable legal fees), penalties, fines, or regulatory action arising out of or in connection with:</p>
+      <ol>
+        <li>The Client's use, configuration, or operation of the Platform.</li>
+        <li>Any breach by the Client of the representations and warranties in Section 8.</li>
+        <li>Any regulatory, civil, or third-party claim brought against Jarvis Daily that relates to the Client's trading activity, account arrangements with third parties, or the Client's regulatory status.</li>
+        <li>Trading losses incurred by the Client or any third party for whom the Client operates the Platform.</li>
+      </ol>
+    </div>
+
+    <!-- 11. Liability Cap -->
+    <div class="section">
+      <div class="section-num">Section 11</div>
+      <h2>Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law:</p>
+      <ol>
+        <li>Jarvis Daily's total aggregate liability under this SOW for any and all claims, regardless of cause, is capped at the fees actually paid by the Client to Jarvis Daily in the 6 months immediately preceding the event giving rise to the claim.</li>
+        <li>Jarvis Daily is not liable for any indirect, incidental, consequential, special, exemplary, or punitive damages, including loss of profits, loss of business, loss of trading opportunities, or trading losses, regardless of the theory of liability.</li>
+        <li>Trading outcomes are expressly excluded from any warranty or liability. The Platform executes as configured; the Client owns the configuration and the outcomes.</li>
+      </ol>
+    </div>
+
+    <!-- 12. Termination -->
+    <div class="section">
+      <div class="section-num">Section 12</div>
+      <h2>Termination</h2>
+
+      <h3>12.1 By Client</h3>
+      <p>The Client may terminate this SOW at any time on 30 days written notice. The setup fee is non-refundable. Monthly retainer is pro-rated for the termination month.</p>
+
+      <h3>12.2 By Jarvis Daily for Convenience</h3>
+      <p>Jarvis Daily may terminate this SOW on 30 days written notice. In such case, a pro-rata refund of any unused prepaid retainer is issued. Jarvis Daily will provide reasonable transition assistance during the notice period.</p>
+
+      <h3>12.3 By Jarvis Daily on Regulatory Event</h3>
+      <p>Jarvis Daily may terminate this SOW on 7 days written notice if Jarvis Daily receives any notice, summons, show-cause notice, or communication from SEBI, NSE, BSE, MCX, Zerodha, or any other regulatory or exchange authority concerning the Platform or the Client's use of it. In such case, the setup fee is non-refundable; retainer is pro-rated to the termination date; Jarvis Daily may immediately suspend Platform operation.</p>
+
+      <h3>12.4 By Either Party for Material Breach</h3>
+      <p>Either party may terminate this SOW on 14 days written notice in the event of a material breach by the other party that remains uncured at the end of the notice period.</p>
+
+      <h3>12.5 Effect of Termination</h3>
+      <p>Sections 8 (Client Compliance Representation), 10 (Indemnification), 11 (Limitation of Liability), 13 (Data Ownership and IP), 14 (Confidentiality), 16 (Governing Law), and 17 (Dispute Resolution) survive termination of this SOW indefinitely.</p>
+    </div>
+
+    <!-- 13. Data Ownership and IP -->
+    <div class="section">
+      <div class="section-num">Section 13</div>
+      <h2>Data Ownership and Intellectual Property</h2>
+
+      <h3>Data Ownership</h3>
+      <p>The Client owns all trading data, configuration data, strategy parameters, transaction records, and audit logs processed through the Platform. The Client retains full access and export rights at any time during the engagement and for 30 days after termination. All Client-account logins and operational credentials for the Platform will be handed over to the Client's team. Jarvis Daily will not use Client data for any purpose other than delivering the services under this SOW.</p>
+
+      <h3>Intellectual Property</h3>
+      <p>The Jarvis Daily AlgoVeda Platform (including its API, source code, system prompts, workflows, execution engine logic, dashboard framework, multi-configuration architecture, and underlying infrastructure) is a pre-existing product owned by Tranquil Veda Private Limited. Under this SOW, the Client is licensing a configured instance of the Platform for the duration of the engagement, and nothing in this engagement transfers ownership of the Platform to the Client or constitutes a work-for-hire arrangement under Section 17 of the Copyright Act 1957. The Client's own trading strategies, parameter values, and account configurations remain the Client's property.</p>
+
+      <h3>Third-Party Service Providers</h3>
+      <p>The service is delivered using reputable third-party providers (Zerodha Kite Connect, cloud hosting, Telegram for alerting). Each operates under its own terms and retains records per its own policies and applicable law. Jarvis Daily selects responsible providers but does not warrant third-party conduct or uptime. Jarvis Daily's total liability for sub-processor incidents is capped at fees paid in the preceding three months.</p>
+    </div>
+
+    <!-- 14. Confidentiality -->
+    <div class="section">
+      <div class="section-num">Section 14</div>
+      <h2>Confidentiality</h2>
+      <p>Each party will keep confidential all non-public information of the other party disclosed under this engagement. Strategy logic, trading parameters, account credentials, and Platform source code are all subject to mutual confidentiality. This obligation survives termination for 3 years.</p>
+    </div>
+
+    <!-- 15. Force Majeure -->
+    <div class="section">
+      <div class="section-num">Section 15</div>
+      <h2>Force Majeure</h2>
+      <p>Neither party is liable for delay or failure to perform due to causes beyond reasonable control including but not limited to acts of God, exchange outages, regulator action, internet backbone failures, broker API outages, pandemic, civil disturbance, or war.</p>
+    </div>
+
+    <!-- 16. Governing Law -->
+    <div class="section">
+      <div class="section-num">Section 16</div>
+      <h2>Governing Law</h2>
+      <p>This SOW is governed by the laws of India. Courts at Pune, Maharashtra have exclusive jurisdiction over any matter not subject to arbitration under Section 17.</p>
+    </div>
+
+    <!-- 17. Dispute Resolution -->
+    <div class="section">
+      <div class="section-num">Section 17</div>
+      <h2>Dispute Resolution</h2>
+      <p>Any dispute arising out of or relating to this SOW will first be referred to good-faith negotiation between the parties for 30 days. If unresolved, the dispute will be referred to arbitration under the Arbitration and Conciliation Act 1996. Seat and venue of arbitration: Pune, Maharashtra. Language: English. Sole arbitrator appointed by mutual agreement; failing agreement, by the Indian Council of Arbitration.</p>
+    </div>
+
+    <!-- 18. Entire Agreement -->
+    <div class="section">
+      <div class="section-num">Section 18</div>
+      <h2>Entire Agreement</h2>
+      <p>This SOW, together with any documents expressly incorporated by reference, constitutes the entire agreement between the parties on the subject matter and supersedes any prior agreements, proposals, or representations, whether written or oral.</p>
+    </div>
+
+    <!-- Signatories -->
+    <div class="section">
+      <div class="section-num">Signatories</div>
+      <h2>Signatures</h2>
+      <div class="sig-grid">
+        <div class="sig-block">
+          <div class="sig-label">For Tranquil Veda Private Limited (Jarvis Daily)</div>
+          <div class="sig-name">Shruti</div>
+          <div class="sig-detail">
+            Authorised Signatory<br>
+            Tranquil Veda Private Limited<br>
+            GSTIN 27AAHCT6956C1Z3<br>
+            Pune, Maharashtra
+          </div>
+          <div class="sig-line">Signature, date and place</div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-label">For the Client</div>
+          <div class="sig-name">Vinayak Sanas</div>
+          <div class="sig-detail">
+            Individual<br>
+            PAN: ______________________<br>
+            Address: ______________________<br>
+            Email: ______________________
+          </div>
+          <div class="sig-line">Signature, date and place</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Tranquil Veda Private Limited · Jarvis Daily · GSTIN 27AAHCT6956C1Z3 · SAC 998314 · Pune, Maharashtra<br>
+      SOW-VIN-001 Rev 1.0 · 15 May 2026 · Valid for signature until 29 May 2026<br>
+      Questions: shruti@jarvisdaily.com · +91 9673758777
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

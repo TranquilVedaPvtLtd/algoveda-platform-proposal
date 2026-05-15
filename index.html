@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="data-published" content="2026-05-15">
+<meta name="data-valid-until" content="2026-05-29">
+<title>AlgoVeda Platform - Built for Vinayak Sanas | Jarvis Daily</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0A1628;
+    --primary-light: #152238;
+    --primary-dark: #060E1A;
+    --accent: #00E676;
+    --accent-dark: #00C853;
+    --gold: #C49A2A;
+    --gold-light: #E8DCC4;
+    --gold-bg: #FDFAF3;
+    --bg: #FFFFFF;
+    --bg-alt: #F8FAFC;
+    --text: #1A2535;
+    --text-muted: #4A5568;
+    --text-faint: #94A3B8;
+    --border: #E2E8F0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased; font-size: 16px; }
+  a { color: inherit; text-decoration: none; }
+
+  .container { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+  section.block { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  section.block:last-child { border-bottom: none; }
+
+  /* Hero */
+  .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: #fff; padding: 80px 0 100px; }
+  .hero .container { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: center; }
+  .hero .meta { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .hero h1 { font-size: 44px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 24px; }
+  .hero h1 span { color: var(--gold); }
+  .hero .pain { font-size: 19px; font-weight: 400; color: #CBD5E1; line-height: 1.5; margin-bottom: 28px; }
+  .hero .outcome { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 36px; padding: 16px 20px; background: rgba(196, 154, 42, 0.12); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; }
+  .hero .outcome strong { color: var(--gold); }
+  .cta-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; background: var(--accent); color: var(--primary); border-radius: 8px; font-weight: 700; font-size: 15px; transition: transform 0.15s, box-shadow 0.15s; }
+  .cta-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0, 230, 118, 0.3); }
+  .cta-primary svg { width: 20px; height: 20px; }
+
+  .contact-card { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 24px; text-align: center; }
+  .contact-card .avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--gold) 0%, #A07D1C 100%); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: #fff; }
+  .contact-card .name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .contact-card .role { font-size: 12px; color: var(--text-faint); margin-bottom: 16px; }
+  .contact-card .line { font-size: 13px; color: #CBD5E1; padding: 6px 0; }
+
+  /* Block headers */
+  .block-num { font-size: 11px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+  .block-title { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 16px; }
+  .block-lede { font-size: 17px; color: var(--text-muted); margin-bottom: 36px; max-width: 720px; }
+
+  /* Block 2 - Context */
+  .ctx-grid { display: grid; gap: 28px; margin-top: 8px; }
+  .ctx-item { background: var(--bg-alt); border-radius: 10px; padding: 24px; border-left: 3px solid var(--gold); }
+  .ctx-item h3 { font-size: 14px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .ctx-item p, .ctx-item li { font-size: 15px; color: var(--text-muted); }
+  .ctx-item ul { list-style: none; padding: 0; }
+  .ctx-item ul li { padding: 6px 0 6px 24px; position: relative; }
+  .ctx-item ul li::before { content: ''; position: absolute; left: 0; top: 16px; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
+
+  /* Block 3 - Scope + Pricing */
+  table.scope { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+  table.scope thead { background: var(--gold-bg); }
+  table.scope th { text-align: left; padding: 14px 16px; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); border-bottom: 2px solid var(--gold-light); }
+  table.scope td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  table.scope td:first-child { font-weight: 600; width: 42%; }
+  table.scope td:last-child { color: var(--text-muted); }
+
+  .price-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+  .price-card { background: var(--gold-bg); border: 1px solid var(--gold-light); border-radius: 10px; padding: 24px; }
+  .price-card .label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .price-card .amount { font-size: 36px; font-weight: 800; color: var(--text); letter-spacing: -1px; line-height: 1; }
+  .price-card .gst { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+  .price-card .desc { font-size: 13px; color: var(--text-muted); margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--gold-light); }
+
+  .why-price { background: var(--bg-alt); border-radius: 8px; padding: 18px 22px; margin: 24px 0; }
+  .why-price strong { color: var(--gold); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  .why-price p { font-size: 14px; color: var(--text-muted); margin-top: 8px; }
+
+  .not-included { margin: 32px 0; padding: 20px; border: 1px dashed var(--border); border-radius: 8px; }
+  .not-included h4 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px; }
+  .not-included ul { list-style: none; padding: 0; }
+  .not-included li { font-size: 14px; color: var(--text-muted); padding: 4px 0 4px 22px; position: relative; }
+  .not-included li::before { content: ''; position: absolute; left: 0; top: 14px; width: 12px; height: 1px; background: var(--text-faint); }
+
+  /* Accordions */
+  details.accord { background: var(--bg-alt); border-radius: 8px; margin: 12px 0; overflow: hidden; }
+  details.accord summary { padding: 16px 20px; font-size: 14px; font-weight: 700; color: var(--text); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  details.accord summary::-webkit-details-marker { display: none; }
+  details.accord summary::after { content: '+'; font-size: 20px; color: var(--gold); font-weight: 700; }
+  details.accord[open] summary::after { content: '-'; }
+  details.accord .accord-body { padding: 0 20px 20px; font-size: 14px; color: var(--text-muted); }
+  details.accord .accord-body ul { padding-left: 1.25rem; margin: 8px 0; }
+  details.accord .accord-body li { margin-bottom: 6px; }
+
+  /* E-sign panel */
+  .esign { margin-top: 36px; padding: 28px; background: var(--primary); color: #fff; border-radius: 10px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .esign .label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .esign .title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .esign .meta { font-size: 13px; color: #CBD5E1; }
+
+  /* Block 4 - Continuity proof */
+  .proof-card { background: linear-gradient(135deg, var(--gold-bg) 0%, #FFF8E1 100%); border: 1px solid var(--gold-light); border-radius: 12px; padding: 36px; }
+  .proof-card .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 12px; }
+  .proof-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+  .proof-card .quote { font-size: 17px; font-style: italic; color: var(--text); line-height: 1.5; padding: 18px 24px; background: rgba(255, 255, 255, 0.6); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; margin: 20px 0; }
+  .proof-card .attribution { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+  .proof-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--gold-light); }
+  .proof-stat .num { font-size: 24px; font-weight: 800; color: var(--gold); }
+  .proof-stat .lbl { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Block 5 - Risk + Decision Criteria */
+  .risk-grid { display: grid; gap: 14px; margin: 24px 0; }
+  .risk-row { background: var(--bg-alt); border-radius: 8px; padding: 18px 22px; }
+  .risk-row .risk-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .risk-row .risk-mit { font-size: 14px; color: var(--text-muted); }
+  .risk-row .risk-mit strong { color: var(--gold); }
+
+  .criteria-grid { display: grid; gap: 14px; margin: 24px 0; }
+  .criteria-row { display: grid; grid-template-columns: 240px 1fr; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .criteria-row:last-child { border: none; }
+  .criteria-row .key { font-size: 14px; font-weight: 700; color: var(--gold); }
+  .criteria-row .val { font-size: 14px; color: var(--text-muted); }
+
+  .sow-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 12px 20px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--text); }
+  .sow-link svg { width: 16px; height: 16px; }
+
+  /* Block 6 - Plan + Ownership + Stakeholder grid */
+  .plan-timeline { display: grid; gap: 14px; margin: 24px 0; }
+  .plan-row { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 16px 20px; background: var(--bg-alt); border-radius: 8px; border-left: 3px solid var(--gold); }
+  .plan-row .when { font-size: 13px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+  .plan-row .what { font-size: 14px; color: var(--text); }
+  .plan-row .what strong { font-weight: 700; }
+
+  .own-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 24px 0; }
+  .own-item { padding: 16px 20px; background: var(--bg-alt); border-radius: 8px; }
+  .own-item .own-icon { width: 32px; height: 32px; background: var(--gold-bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .own-item .own-icon svg { width: 18px; height: 18px; color: var(--gold); }
+  .own-item .own-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .own-item .own-desc { font-size: 13px; color: var(--text-muted); }
+
+  table.stakeholder { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+  table.stakeholder th { text-align: left; padding: 12px 14px; background: var(--gold-bg); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
+  table.stakeholder td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.stakeholder td:first-child { font-weight: 700; color: var(--text); width: 25%; }
+
+  /* CTA repeat */
+  .cta-final { margin-top: 40px; padding: 32px; background: var(--primary); color: #fff; border-radius: 12px; text-align: center; }
+  .cta-final h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .cta-final p { font-size: 15px; color: #CBD5E1; margin-bottom: 24px; }
+
+  /* Footer */
+  footer { padding: 40px 0; text-align: center; font-size: 12px; color: var(--text-faint); }
+  footer .lines { line-height: 1.8; }
+
+  /* Mobile */
+  @media (max-width: 720px) {
+    .hero .container { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 32px; }
+    .block-title { font-size: 24px; }
+    .price-strip { grid-template-columns: 1fr; }
+    .own-grid { grid-template-columns: 1fr; }
+    .criteria-row { grid-template-columns: 1fr; gap: 6px; }
+    .plan-row { grid-template-columns: 1fr; gap: 6px; }
+    .esign { grid-template-columns: 1fr; }
+    section.block { padding: 56px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BLOCK 1 - HERO -->
+<section class="hero">
+  <div class="container">
+    <div>
+      <div class="meta">Platform Proposal · Prepared 15 May 2026 · Valid until 29 May 2026</div>
+      <h1>Vinayak, your <span>Tradetron replacement</span>.</h1>
+      <p class="pain">You said the entry timeouts, exit delays, and missing partial-exit logic are costing real money every week, and you want one dashboard where every configuration lives in one place with a single quantity slider.</p>
+      <div class="outcome">
+        Custom platform live by <strong>15 July 2026</strong>, from <strong>Rs 15,000/month</strong> + Rs 1,75,000 setup.
+      </div>
+      <a class="cta-primary" href="https://wa.me/919673758777?text=Vinayak%20here%2C%20ready%20to%20move%20on%20AlgoVeda" id="cta-hero">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        Reply on WhatsApp - Shruti, +91 9673758777
+      </a>
+    </div>
+    <div class="contact-card">
+      <div class="avatar">S</div>
+      <div class="name">Shruti</div>
+      <div class="role">Delivery Lead · TranquilVeda</div>
+      <div class="line">+91 9673758777</div>
+      <div class="line">shruti@jarvisdaily.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 2 - CONTEXT -->
+<section class="block" id="context">
+  <div class="container">
+    <div class="block-num">Block 2 · Context</div>
+    <h2 class="block-title">Here is what you are dealing with.</h2>
+    <p class="block-lede">Captured from our 14 May 2026 conversation. If anything here is inaccurate, flag it before we sign.</p>
+
+    <div class="ctx-grid">
+      <div class="ctx-item">
+        <h3>Today</h3>
+        <ul>
+          <li>Tradetron Creator+ at Rs 9,000/month is the execution path, but the 2.5-minute entry window, 30 to 40 second exit delays, and the all-in/all-out exit model do not match how you actually trade Natural Gas.</li>
+          <li>4 to 5 strategies in your Phase 1 book, including the 27-set Natural Gas configuration already extracted in our earlier engagement.</li>
+          <li>5 to 6 active configurations (per your description), with Bhopesh handling daily token rotation and first-line ops.</li>
+          <li>22-hour market window between equity and MCX commodity sessions. Manual token rotation across multiple configurations runs to 15 to 20 minutes every morning.</li>
+        </ul>
+      </div>
+
+      <div class="ctx-item">
+        <h3>What you asked for</h3>
+        <p>One custom platform that connects directly to Zerodha Kite, hosts your 4 to 5 strategies natively (no Tradetron in the middle), gives you a central command dashboard with per-configuration tabs, automates daily token generation, exposes a single quantity multiplier slider that scales position size across all configurations, and lets you edit strategy parameters in real time without a redeploy. Phase 1 ready for paper-trade UAT in roughly 6 weeks, hardened and live in 8 weeks.</p>
+      </div>
+
+      <div class="ctx-item">
+        <h3>What happens if nothing changes</h3>
+        <p>Every 30-second exit delay on a 3-lot Natural Gas position is Rs 450 to Rs 750 of slippage per trade. Over 20 trading days, that compounds to a number that already exceeds the price of building this platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 4 - PROOF (placed between Context and Scope, NOT adjacent to Pricing) -->
+<section class="block" id="proof">
+  <div class="container">
+    <div class="block-num">Block 3 · Continuity</div>
+    <h2 class="block-title">We have already built half of this for you.</h2>
+    <p class="block-lede">This is not a cold start. From our earlier engagement, the foundation is already running.</p>
+
+    <div class="proof-card">
+      <div class="label">Engagement continuity · Vinayak Sanas · Q1 2026</div>
+      <h3>AlgoVeda OMS - the R1 to R4 layer is already paper-trading live.</h3>
+      <p style="font-size: 15px; color: var(--text-muted);">In the earlier engagement we built the Kite Connect integration (REST + live WebSocket), the OMS engine for R1 Smart Entry, R2 Instant Exit, R3 Partial Exits, and R4 Averaging Down, the daily token fetcher, and extracted all 27 sets of your Natural Gas strategy. The strategy is currently deployed in hybrid mode on Tradetron Paper Trading. The Phase 2 work scoped below ports that proven logic out of Tradetron entirely and adds the dashboard, multi-configuration support, and real-time editor on top.</p>
+
+      <div class="quote">
+        "The R1 to R4 OMS engine and the Kite WebSocket layer are working end-to-end. The blocker we had on the API OAuth token is resolved. The strategy is live-entered on Tradetron paper account."
+        <div class="attribution">From the AlgoVeda project status memo, 3 April 2026.</div>
+      </div>
+
+      <div class="proof-stats">
+        <div class="proof-stat">
+          <div class="num">27</div>
+          <div class="lbl">Strategy sets already extracted</div>
+        </div>
+        <div class="proof-stat">
+          <div class="num">60%+</div>
+          <div class="lbl">Of Phase 2 build reused from Phase 1</div>
+        </div>
+        <div class="proof-stat">
+          <div class="num">R1-R4</div>
+          <div class="lbl">Execution logic already proven</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 3 - SCOPE + PRICING (placed after proof) -->
+<section class="block" id="scope" style="background: var(--bg-alt);">
+  <div class="container">
+    <div class="block-num">Block 4 · Scope and Pricing</div>
+    <h2 class="block-title">What you get and what it costs.</h2>
+    <p class="block-lede">Single SKU. Monthly retainer and setup quoted separately. Prices hold for 14 days.</p>
+
+    <table class="scope">
+      <thead>
+        <tr><th>What you get</th><th>What it does for you</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Central Command Dashboard</td><td>One web view of every active configuration. Tabs to dive into any one. Cross-configuration aggregated view for P&amp;L, open positions, pending orders.</td></tr>
+        <tr><td>Native Strategy Engine</td><td>4 to 5 strategies hosted natively against your Kite Connect feed. Tradetron is no longer in the order path.</td></tr>
+        <tr><td>Daily Token Automation</td><td>Per-configuration token refresh ahead of 9:15 IST. Bhopesh runs day-to-day; we step in only on platform faults.</td></tr>
+        <tr><td>Smart Execution Layer</td><td>R1 Smart Entry (30-minute limit-fill window with partial tracking), R2 Instant Exit (sub-2-second market order), R3 Partial Exits in profit-milestone tranches, R4 Averaging Down with configurable level caps.</td></tr>
+        <tr><td>Quantity Multiplier UI</td><td>One slider scales base quantity across every active configuration in real time. Per-configuration absolute caps prevent runaway orders.</td></tr>
+        <tr><td>Real-Time Parameter Editor</td><td>Adjust entry threshold, target, stop loss, qty for any strategy without restart or redeploy. Changes take effect on the next signal evaluation.</td></tr>
+        <tr><td>Audit and Kill Switch</td><td>Every order logged with reason, signal, price, fill status. Telegram alerts on rejections, failed token refresh, kill switch fires. One-click kill switch cancels all pending orders across configurations.</td></tr>
+        <tr><td>Mumbai VPS Deployment</td><td>Low-latency hosting close to NSE and MCX matching engines, with static IP registered against your Kite Connect app.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="price-strip">
+      <div class="price-card">
+        <div class="label">One-time Setup</div>
+        <div class="amount">Rs 1,75,000</div>
+        <div class="gst">+ 18% GST = Rs 2,06,500 invoice value</div>
+        <div class="desc">Build, integrate, test, hardening, and go-live. 50% on SOW signature, 50% at kickoff (Week 1).</div>
+      </div>
+      <div class="price-card">
+        <div class="label">Monthly Retainer</div>
+        <div class="amount">Rs 15,000<span style="font-size: 14px; font-weight: 500; color: var(--text-muted);">/mo</span></div>
+        <div class="gst">+ 18% GST = Rs 17,700 invoice value</div>
+        <div class="desc">Platform-level maintenance, monitoring, incident response, parameter and minor logic tweaks. Billed in advance on the 1st of each month.</div>
+      </div>
+    </div>
+
+    <div class="why-price">
+      <strong>Why this price</strong>
+      <p>60%+ of the build is reused from the Phase 1 R1-R4 OMS engagement (Kite integration, execution engine, token fetcher, 27 strategy sets). New work is the multi-configuration dashboard, native strategy hosting, real-time editor, and the quantity multiplier UI. Monthly retainer is dimensioned for incident response and platform-level maintenance only, because Bhopesh runs daily ops.</p>
+    </div>
+
+    <div class="not-included">
+      <h4>What is not included (keeps the engagement focused)</h4>
+      <ul>
+        <li>Day-to-day token rotation and per-configuration onboarding (Bhopesh's scope, by your design).</li>
+        <li>Zerodha Kite Connect subscription fees (Rs 500/month per API key, billed by Zerodha directly to your account).</li>
+        <li>VPS hosting costs (approximately Rs 3,000 to 4,000/month, billed at cost via TranquilVeda or billed directly to you).</li>
+        <li>New strategies beyond the initial 4 to 5 in scope (Rs 40,000 per additional strategy as an add-on).</li>
+        <li>Trading-decision advice or strategy logic design (you own the trading; we own the software).</li>
+      </ul>
+    </div>
+
+    <details class="accord">
+      <summary>For your CFO: Payment schedule, GST, TDS</summary>
+      <div class="accord-body">
+        <p><strong>Setup, Rs 1,75,000 + 18% GST:</strong></p>
+        <ul>
+          <li>50% on SOW signature: Rs 87,500 + Rs 15,750 GST = Rs 1,03,250 (Invoice JAR-VIN-001)</li>
+          <li>50% on kickoff Week 1: Rs 87,500 + Rs 15,750 GST = Rs 1,03,250 (Invoice JAR-VIN-002)</li>
+        </ul>
+        <p style="margin-top: 12px;"><strong>Monthly retainer:</strong> Rs 15,000 + Rs 2,700 GST = Rs 17,700 invoiced on the 1st of each month, 7-day payment terms.</p>
+        <p style="margin-top: 12px;"><strong>GST:</strong> 9% CGST + 9% SGST (same-state, Maharashtra to Maharashtra). SAC code 998314.</p>
+        <p style="margin-top: 12px;"><strong>TDS:</strong> You may deduct TDS at 2% u/s 194C or 10% u/s 194J as applicable. Form 16A required quarterly.</p>
+      </div>
+    </details>
+
+    <details class="accord">
+      <summary>For your tech lead: Architecture and stack</summary>
+      <div class="accord-body">
+        <ul>
+          <li>Backend: Python 3.11+, FastAPI, asyncio</li>
+          <li>WebSocket: KiteTicker streaming, tick-by-tick consumer</li>
+          <li>State store: PostgreSQL (per-configuration schema with row-level isolation)</li>
+          <li>Frontend: Next.js / React, real-time updates via WebSocket subscription to backend</li>
+          <li>Deployment: Mumbai VPS, Ubuntu 22, systemd, NGINX, Let's Encrypt SSL</li>
+          <li>Monitoring: Uptime alerts via Telegram, structured logging with rotation and retention</li>
+          <li>Static IP: registered against your Kite Connect app per Zerodha April 2025 requirement</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="accord">
+      <summary>FAQ - the questions every prospect asks</summary>
+      <div class="accord-body">
+        <p><strong>Why not just stay on Tradetron?</strong> Their execution settings are coupled (entry and exit share the same price-match logic), which is what causes your 30 to 40 second exit delay. The fix requires a separate execution engine outside their platform.</p>
+        <p style="margin-top: 10px;"><strong>What is the lock-in?</strong> No multi-year lock-in. Monthly retainer is month-to-month with 30-day notice on termination. Setup is non-refundable.</p>
+        <p style="margin-top: 10px;"><strong>Who owns the code?</strong> See Block 5b and the SOW Section "Data Ownership and Intellectual Property". Short version: you own your data and configurations; we retain ownership of the Platform itself (you are licensing a configured instance, not buying the source code).</p>
+        <p style="margin-top: 10px;"><strong>What if a strategy loses money?</strong> Trading outcomes are your responsibility. We are a software vendor, not an advisor. Strategy logic is yours to define; our job is to execute it as configured.</p>
+        <p style="margin-top: 10px;"><strong>What if your team becomes unavailable?</strong> Codebase + runbook + credentials vault is handed over at the 2-hour handover call (see Block 6). You and Bhopesh can operate the platform independently if needed.</p>
+      </div>
+    </details>
+
+    <div class="esign">
+      <div>
+        <div class="label">Sign to start</div>
+        <div class="title">Setup invoice released within 1 business day of SOW signature.</div>
+        <div class="meta">SOW is a 2-page legal instrument linked from Block 5b. E-signature accepted.</div>
+      </div>
+      <a class="cta-primary" href="https://wa.me/919673758777?text=AlgoVeda%20-%20ready%20to%20sign%20SOW" id="cta-esign">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        Send me the SOW
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK 5 - RISK + DECISION CRITERIA -->
+<section class="block" id="risk">
+  <div class="container">
+    <div class="block-num">Block 5 · Risk and Decision Criteria</div>
+    <h2 class="block-title">What could go wrong, and how to evaluate this.</h2>
+    <p class="block-lede">The risks you raised on the call, plus the universals. Each one has a single named mitigation.</p>
+
+    <h3 style="font-size: 18px; font-weight: 700; margin: 24px 0 12px;">5a. What could go wrong</h3>
+    <div class="risk-grid">
+      <div class="risk-row">
+        <div class="risk-name">Kite WebSocket disconnects mid-market</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Reconnect with exponential backoff, full position and order reconcile via REST before any new order is permitted, idempotent intent queue gated on last-known-good snapshot.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-name">Daily token refresh fails for a configuration</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Bhopesh's daily checklist runs by 8:30 IST; Telegram alert fires within 60 seconds of any failed refresh; we are on the same alert thread.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-name">Quantity multiplier fat-finger</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Per-configuration hard caps enforced server-side. Multiplier values above 1.5x trigger a confirmation modal. Above 2x is disabled by default and unlocked only via a separate setting.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-name">Static IP changes more than once a week (Kite limit)</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Mumbai VPS with elastic IP held at network layer; we own the IP, not the compute layer. IP outlives any single instance.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-name">Strategy parameter edit triggers a runaway trade</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Param changes staged with a 30-second confirmation cool-off; bounds-checked against last 30 days of tick data; logged to an append-only audit trail.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-name">If the TranquilVeda team becomes unavailable</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Full codebase, runbook, and credentials vault handed over at go-live. You and Bhopesh can operate the platform independently. No code escrow needed.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-name">If the AI/API providers deprecate a model or endpoint</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> No AI in the order path. Pure deterministic execution against Kite Connect. Only model-side risk is Zerodha changing the API itself, in which case we patch under the monthly retainer.</div>
+      </div>
+      <div class="risk-row">
+        <div class="risk-name">If results miss expectations by month 3</div>
+        <div class="risk-mit"><strong>Mitigation:</strong> Trading outcomes are not in our scope; what we guarantee is fidelity of execution (signal to order placement under 2 seconds, audit trail completeness, uptime during market hours).</div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 18px; font-weight: 700; margin: 36px 0 12px;">5b. How to evaluate this if you were us</h3>
+    <div class="criteria-grid">
+      <div class="criteria-row"><div class="key">Time to first value</div><div class="val">Paper-trade UAT in roughly 6 weeks from kickoff; hardened and live in 8 weeks.</div></div>
+      <div class="criteria-row"><div class="key">Code ownership</div><div class="val">You own your data, configurations, and operational access. We retain ownership of the Platform itself. Full clause in the SOW.</div></div>
+      <div class="criteria-row"><div class="key">Exit</div><div class="val">Month-to-month retainer, 30-day written notice. Codebase and credentials are with you on day one of go-live, not at end of contract.</div></div>
+      <div class="criteria-row"><div class="key">Pricing transparency</div><div class="val">Single SKU. No hidden fees. Pass-through costs (Kite API, VPS) at cost.</div></div>
+      <div class="criteria-row"><div class="key">Liability</div><div class="val">Capped at fees paid in the trailing 3 months. Trading outcomes excluded. Full terms in the SOW.</div></div>
+    </div>
+
+    <a class="sow-link" href="sow.html" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+      See detailed Statement of Work (sow.html)
+    </a>
+
+    <details class="accord" style="margin-top: 28px;">
+      <summary>For Legal: Compliance representation, indemnification, termination triggers</summary>
+      <div class="accord-body">
+        <p><strong>Client compliance representation:</strong> Client represents and warrants that Client and all end-users of the Platform hold all regulatory authorisations required for their intended use.</p>
+        <p style="margin-top: 8px;"><strong>Software-vendor framing:</strong> TranquilVeda is a software vendor. We do not advise on, recommend, manage, or take discretion over any trading activity. All trading decisions are Client's responsibility.</p>
+        <p style="margin-top: 8px;"><strong>Indemnification:</strong> Client indemnifies TranquilVeda against any regulatory, civil, or third-party claim arising from Client's use of the Platform.</p>
+        <p style="margin-top: 8px;"><strong>Termination on regulatory event:</strong> TranquilVeda may terminate with 7 days notice if it receives any notice from SEBI, NSE, BSE, MCX, or Zerodha relating to the Platform or to Client's use of it.</p>
+        <p style="margin-top: 8px;"><strong>Liability cap:</strong> Total liability capped at fees received in the trailing 6 months.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- BLOCK 6 - WHAT HAPPENS NEXT -->
+<section class="block" id="next" style="background: var(--bg-alt);">
+  <div class="container">
+    <div class="block-num">Block 6 · What happens next</div>
+    <h2 class="block-title">First 14 days, end-state, who-cares-about-what.</h2>
+
+    <h3 style="font-size: 18px; font-weight: 700; margin: 24px 0 12px;">6a. First 14 days from SOW signature</h3>
+    <div class="plan-timeline">
+      <div class="plan-row"><div class="when">Day 1 to 2</div><div class="what"><strong>Kickoff and credentials handover.</strong> Bhopesh shares per-configuration Kite credentials. We share repo access, Telegram alert thread, runbook draft. Setup Invoice 1 (50%) released.</div></div>
+      <div class="plan-row"><div class="when">Day 3 to 7</div><div class="what"><strong>Multi-configuration scaffolding.</strong> PostgreSQL tenant model, per-configuration credential vault, token refresh worker per configuration. Mumbai VPS provisioned, static IP registered with Zerodha.</div></div>
+      <div class="plan-row"><div class="when">Day 8 to 12</div><div class="what"><strong>Strategy engine port.</strong> R1-R4 OMS lifted from the prior engagement, refactored for the new multi-configuration architecture. Natural Gas strategy (27 sets) ported as the first reference strategy.</div></div>
+      <div class="plan-row"><div class="when">Day 13 to 14</div><div class="what"><strong>Dashboard skeleton on staging.</strong> Tab navigation, position view, real-time tick subscription. Setup Invoice 2 (50%) released at end of Week 2.</div></div>
+    </div>
+
+    <h3 style="font-size: 18px; font-weight: 700; margin: 36px 0 12px;">6b. What you own at the end</h3>
+    <div class="own-grid">
+      <div class="own-item">
+        <div class="own-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+        <div class="own-title">Private GitHub repository</div>
+        <div class="own-desc">Full source. Yours from day 1 of build.</div>
+      </div>
+      <div class="own-item">
+        <div class="own-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+        <div class="own-title">Credentials vault</div>
+        <div class="own-desc">Per-configuration credentials encrypted at rest. Bhopesh holds master key.</div>
+      </div>
+      <div class="own-item">
+        <div class="own-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+        <div class="own-title">Runbook PDF</div>
+        <div class="own-desc">Daily ops procedures, incident playbooks, recovery flows.</div>
+      </div>
+      <div class="own-item">
+        <div class="own-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+        <div class="own-title">2-hour handover call</div>
+        <div class="own-desc">Live walkthrough with Bhopesh on every operational surface.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 18px; font-weight: 700; margin: 36px 0 12px;">6c. Who cares about what</h3>
+    <table class="stakeholder">
+      <thead>
+        <tr><th>Reader</th><th>What is in it for them</th><th>Where to look</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>You (Vinayak)</td><td>Exit Tradetron, fix R1-R4 execution gaps, one dashboard, real-time controls.</td><td><a href="#scope" style="color: var(--gold);">Block 4 - Scope</a></td></tr>
+        <tr><td>Bhopesh (Ops)</td><td>Per-configuration token automation, Telegram alerts, kill switch, full runbook.</td><td><a href="#risk" style="color: var(--gold);">Block 5 - Risk</a></td></tr>
+        <tr><td>You (CFO hat)</td><td>Two invoices for setup, fixed monthly, no hidden costs, GST and TDS spelled out.</td><td>Block 4 - Payment schedule accordion</td></tr>
+        <tr><td>You (Legal hat)</td><td>Compliance representation on Client, software-vendor framing, capped liability, regulatory termination right.</td><td>Block 5 - Legal accordion + SOW link</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cta-final">
+      <h3>Ready to start?</h3>
+      <p>Reply on WhatsApp. We will send the SOW within 1 business day; setup invoice releases on signature.</p>
+      <a class="cta-primary" href="https://wa.me/919673758777?text=AlgoVeda%20-%20let%27s%20go" id="cta-final">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        WhatsApp Shruti now
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container lines">
+    <div>Tranquil Veda Private Limited · Jarvis Daily</div>
+    <div>GSTIN 27AAHCT6956C1Z3 · SAC 998314 · Pune, Maharashtra</div>
+    <div>Proposal prepared 15 May 2026 · Valid for signature until 29 May 2026 · This URL auto-expires 14 June 2026</div>
+    <div>Contact: shruti@jarvisdaily.com · +91 9673758777</div>
+  </div>
+</footer>
+
+<!-- PostHog analytics -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_placeholder_token', { api_host: 'https://app.posthog.com', persistence: 'localStorage', autocapture: false });
+  posthog.register({ proposal: 'vinayak-algoveda', proposal_date: '2026-05-15' });
+  posthog.capture('proposal_loaded', { block_count_rendered: 6, session_count: (parseInt(localStorage.getItem('sc_vin')||'0')+1) });
+  localStorage.setItem('sc_vin', (parseInt(localStorage.getItem('sc_vin')||'0')+1).toString());
+
+  // Scroll depth
+  let depths = [25, 50, 75, 100], fired = {};
+  window.addEventListener('scroll', () => {
+    const pct = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
+    depths.forEach(d => { if (pct >= d && !fired[d]) { fired[d] = true; posthog.capture('scroll_depth', { depth: d }); } });
+  });
+
+  // Section viewed
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) posthog.capture('section_viewed', { section: e.target.id }); });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('section[id]').forEach(s => io.observe(s));
+
+  // CTA tracking
+  document.querySelectorAll('a[id^="cta-"]').forEach(a => a.addEventListener('click', () => posthog.capture('cta_clicked', { cta_id: a.id })));
+  document.querySelectorAll('a[href*="wa.me"]').forEach(a => a.addEventListener('click', () => posthog.capture('whatsapp_clicked', { href: a.href })));
+  document.querySelectorAll('a[href="sow.html"]').forEach(a => a.addEventListener('click', () => posthog.capture('sow_clicked')));
+  document.querySelectorAll('details.accord').forEach(d => d.addEventListener('toggle', () => { if (d.open) posthog.capture('faq_opened', { summary: d.querySelector('summary').innerText.slice(0, 80) }); }));
+
+  // Time on page
+  const start = Date.now();
+  window.addEventListener('beforeunload', () => posthog.capture('time_on_page', { seconds: Math.round((Date.now() - start) / 1000) }));
+
+  // 30-day infra expiry
+  const published = new Date('2026-05-15');
+  const expiry = new Date(published.getTime() + 30 * 24 * 60 * 60 * 1000);
+  if (new Date() > expiry) {
+    document.body.innerHTML = '<div style="padding: 80px; text-align: center; font-family: Inter, sans-serif;"><h1 style="color: #C49A2A;">This proposal has expired.</h1><p style="color: #4A5568; margin-top: 16px;">Reply to Shruti at shruti@jarvisdaily.com for a refreshed version.</p></div>';
+  }
+</script>
+
+</body>
+</html>
