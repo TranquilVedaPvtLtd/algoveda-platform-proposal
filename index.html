@@ -308,9 +308,15 @@
       <h4>To keep the engagement focused, the following are kept outside scope</h4>
       <ul>
         <li>Day-to-day token rotation and per-configuration onboarding, which sits with Bhopesh ji as per your preference.</li>
-        <li>Zerodha Kite Connect subscription fees (Rs 500/month per API key), billed by Zerodha directly to your account.</li>
-        <li>VPS hosting costs (approximately Rs 3,000 to 4,000/month), passed through at cost via TranquilVeda or billed directly to you, whichever you prefer.</li>
+        <li>All third-party API and infrastructure costs are borne directly by you, sir, at cost (no markup from our side):
+          <ul style="margin-top: 6px;">
+            <li>Zerodha Kite Connect subscription: Rs 500/month per API key, billed by Zerodha directly to your account.</li>
+            <li>VPS hosting (Mumbai region): approximately Rs 3,000 to 4,000/month, passed through at cost or billed directly to you, whichever you prefer.</li>
+            <li>LLM API tokens (Claude or DeepSeek): only applicable once the AI Strategy Builder add-on is delivered; approximately Rs 100 to 300/month at typical usage, pass-through at cost.</li>
+          </ul>
+        </li>
         <li>Additional strategies beyond the initial 4 to 5 in scope. These can be added at Rs 40,000 per strategy as a separately quoted add-on.</li>
+        <li>The AI Strategy Builder (natural-language strategy creation) is a separate Phase 2 add-on at Rs 1,75,000, available when you are ready.</li>
         <li>Trading-decision advice or strategy logic design. The trading judgement remains entirely with you, sir; we are responsible for the software that executes it.</li>
       </ul>
     </div>
@@ -540,13 +546,6 @@
   // Time on page
   const start = Date.now();
   window.addEventListener('beforeunload', () => posthog.capture('time_on_page', { seconds: Math.round((Date.now() - start) / 1000) }));
-
-  // 30-day infra expiry
-  const published = new Date('2026-05-15');
-  const expiry = new Date(published.getTime() + 30 * 24 * 60 * 60 * 1000);
-  if (new Date() > expiry) {
-    document.body.innerHTML = '<div style="padding: 80px; text-align: center; font-family: Inter, sans-serif;"><h1 style="color: #C49A2A;">This proposal has expired.</h1><p style="color: #4A5568; margin-top: 16px;">Reply to Shruti at shruti@jarvisdaily.com for a refreshed version.</p></div>';
-  }
 </script>
 
 </body>
