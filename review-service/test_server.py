@@ -49,6 +49,38 @@ class ReviewFixture(unittest.TestCase):
         return caught.exception
 
 class StoreTests(ReviewFixture):
+    def test_archived_approval_and_feedback_remain_readable_but_not_actionable(self):
+        self.action("approve")
+        self.store.review(self.payload([{"id": "CALL-002", "action": "comment", "revision": 1,
+                                         "comment": "Retain this original feedback."}]))
+        before = self.state()
+        self.manifest["document_revision"] = 2
+        self.manifest["requirements"] = [{"id": "CALL-003", "revision": 1, "title": "Consolidated"}]
+        self.save_manifest()
+        after = self.state()
+        self.assertEqual(set(after["items"]), {"CALL-003"})
+        self.assertEqual(after["archived_items"], before["items"])
+        self.assert_api_error(400, self.store.review, self.payload())
+        self.store = ReviewStore(self.database, self.manifest_path)
+        self.assertEqual(self.state()["archived_items"], before["items"])
+
+    def test_reactivated_item_needs_review_and_keeps_prior_history(self):
+        original = dict(self.manifest["requirements"][0])
+        self.action("approve")
+        before = self.state()["items"]["CALL-001"]
+        self.manifest["document_revision"] = 2
+        self.manifest["requirements"].pop(0)
+        self.save_manifest()
+        self.assertEqual(self.state()["archived_items"]["CALL-001"]["status"], "approved")
+        self.manifest["document_revision"] = 3
+        self.manifest["requirements"].append(original)
+        self.save_manifest()
+        after = self.state()
+        self.assertNotIn("CALL-001", after["archived_items"])
+        self.assertEqual(after["items"]["CALL-001"]["status"], "pending")
+        self.assertEqual(after["items"]["CALL-001"]["history"][:-1], before["history"])
+        self.assertEqual(after["items"]["CALL-001"]["history"][-1]["action"], "revision_changed")
+
     def test_approval_restart_and_append_only_history(self):
         result = self.action("approve")
         self.assertEqual(result["version"], 1)

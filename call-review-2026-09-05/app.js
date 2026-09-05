@@ -14,7 +14,7 @@
   const sourceLabels = { explicit_request: 'Requested in the call', developer_commitment: 'Commitment in the call', reported_incident: 'Reported issue', claimed_existing_capability: 'Existing capability to verify', proposed_approach: 'Approach discussed', inferred_guardrail: 'Proposed safeguard', explicit_decision: 'Decision in the call', prior_chat_request: 'Earlier discussion', prior_conversation: 'Earlier discussion' };
   const basisLabels = { proposed_verification: 'Proposed check', explicit_call_criterion: 'Criterion from the call', inferred_guardrail: 'Proposed safeguard', explicit_request: 'Requested in the call', explicit_call_target: 'Target discussed in the call' };
   Object.assign(sourceLabels, {
-    claimed_already_done: 'Reported as already done', client_agreement: 'Agreement in the call',
+    review_feedback: 'Subsequent review feedback', claimed_already_done: 'Reported as already done', client_agreement: 'Agreement in the call',
     client_stated_condition: 'Condition stated in the call', developer_suggestion: 'Suggestion in the call',
     disputed_existing_claim: 'Existing result disputed', efficiency_aspiration: 'Efficiency goal',
     existing_capability_claim: 'Existing capability to verify', explicit_agreement: 'Agreement in the call',
@@ -25,7 +25,7 @@
     inferred_verification_task: 'Suggested verification', prior_user_instruction: 'Earlier instruction',
     proposed_design_in_call: 'Design approach discussed', verify_existing_tracker_work: 'Existing work to recheck',
   });
-  Object.assign(basisLabels, { inferred_guardrail_for_approval: 'Proposed safeguard for approval', call_criterion: 'Criterion from the call' });
+  Object.assign(basisLabels, { proposed_completion_check: 'Proposed completion check', inferred_guardrail_for_approval: 'Proposed safeguard for approval', call_criterion: 'Criterion from the call' });
   let data = null;
   let config = null;
   let saved = null;
@@ -143,7 +143,7 @@
     title.id = `title-${item.id}`;
     titleRow.append(title);
     top.append(titleRow, el('p', 'card-outcome', item.requested_outcome));
-    if (state.stale) top.append(el('p', 'revision-note', 'This wording has changed since the previous review. Please review it again. Earlier feedback is retained.'));
+    if (state.stale || (item.revision > 1 && state.status !== 'approved')) top.append(el('p', 'revision-note', 'This wording has changed since the previous review. Please review it again. Earlier feedback is retained.'));
     if (item.clarification_required || item.comments_needed || state.clarification_required || state.comments_needed) {
       const decision = el('p', 'decision-note');
       decision.append(el('strong', '', state.status === 'approved' ? 'Decision reviewed: ' : 'Please clarify: '), document.createTextNode(clean(item.comment_prompt || item.decision_needed || 'Add a short note confirming this decision before approval.')));
@@ -170,7 +170,7 @@
       for (const source of item.evidence) {
         const block = el('blockquote', 'evidence');
         block.append(el('p', '', source.summary || source.quote || 'Discussed in the source conversation.'));
-        const where = source.time_range ? `Call section ${clean(source.time_range)}. Approximate section timing.` : item.source?.label || 'Earlier discussion';
+        const where = source.time_range ? `Call section ${clean(source.time_range)}. Approximate section timing.` : source.source_label || item.source?.label || 'Earlier discussion';
         block.append(el('cite', '', where));
         evidence.append(block);
       }
@@ -215,6 +215,7 @@
       if (state.resolution) { const resolution = el('div', 'comment'); resolution.append(el('p', '', 'Review resolution: ' + state.resolution)); history.append(resolution); }
       card.append(history);
     }
+    appendLinkedFeedback(card, item);
     const actions = el('div', 'card-actions');
     actions.append(makeButton('Comment', 'button ghost', () => openFeedback(item, 'comment'), !canSave()));
     actions.append(makeButton('Propose change', 'button secondary', () => openFeedback(item, 'request_changes'), !canSave()));
@@ -275,20 +276,21 @@
     all('.category-nav button').forEach((button) => { const active = button.dataset.category === category; button.classList.toggle('active', active); button.setAttribute('aria-pressed', active); });
     $('category-select').value = category;
     const visible = filteredItems();
-    $('list-title').textContent = category === 'all' ? 'All requirements' : category;
+    $('list-title').textContent = category === 'all' ? 'Engineering requirements' : category;
     $('result-count').textContent = `${visible.length} of ${total} requirements shown`;
     const fragment = document.createDocumentFragment();
     visible.forEach((item) => fragment.append(createCard(item)));
     $('requirements').replaceChildren(fragment);
     $('no-results').hidden = visible.length !== 0;
     renderSelection();
+    renderAppendices();
   }
 
   function populateCategories() {
     const categories = [...new Set(data.requirements.map((item) => item.category))];
     for (const name of ['all', ...categories]) {
       const count = name === 'all' ? data.requirements.length : data.requirements.filter((item) => item.category === name).length;
-      const button = makeButton(name === 'all' ? 'All requirements' : name, '', () => { category = name; render(); });
+      const button = makeButton(name === 'all' ? 'Engineering requirements' : name, '', () => { category = name; render(); });
       button.dataset.category = name;
       button.append(el('span', '', count));
       $('category-nav').append(button);
@@ -299,7 +301,7 @@
   function populateDecisions() {
     if (!data.decisions?.length) return;
     const foldout = el('details', 'document-notes');
-    foldout.append(el('summary', '', 'Call decisions and open questions'));
+    foldout.append(el('summary', '', 'Scope decisions and existing work'));
     const body = el('div', 'document-notes-body');
     for (const decision of data.decisions) {
       const block = el('section');
@@ -334,6 +336,124 @@
     }
     foldout.append(body);
     $('connection-banner').insertAdjacentElement('afterend', foldout);
+  }
+
+  function historicalEntries() {
+    return [...(data.coordination_appendix || []), ...(data.superseded_appendix || [])];
+  }
+
+  function appendSavedHistory(container, state, includeAudit = true) {
+    if (!state) return;
+    for (const comment of Array.isArray(state.comments) ? state.comments : []) {
+      const block = el('div', 'comment');
+      block.append(el('p', '', (comment.kind === 'resolution' ? 'Earlier resolution: ' : '') + comment.text));
+      if (timeLabel(comment.at)) block.append(el('time', '', timeLabel(comment.at)));
+      container.append(block);
+    }
+    if (state.resolution) container.append(el('p', '', 'Earlier resolution: ' + state.resolution));
+    if (includeAudit && Array.isArray(state.history) && state.history.length) {
+      const audit = el('details', 'history-audit');
+      audit.append(el('summary', '', `Review history (${state.history.length} events)`));
+      for (const event of state.history) {
+        const row = el('div', 'history-event');
+        row.append(el('p', '', `${timeLabel(event.at)} · ${String(event.action || 'review').replace(/_/g, ' ')} · requirement revision ${event.revision ?? 'unknown'}`));
+        if (event.text) row.append(el('p', '', event.text));
+        audit.append(row);
+      }
+      container.append(audit);
+    }
+  }
+
+  function appendLinkedFeedback(card, item) {
+    if (!token || !saved || !item.absorbed_requirements?.length) return;
+    const linked = item.absorbed_requirements.map((id) => ({ id, state: saved.archived_items?.[id] }))
+      .filter(({ state }) => state && (state.comments?.length || state.history?.length));
+    if (!linked.length) return;
+    const fold = el('details', 'linked-feedback');
+    fold.append(el('summary', '', `Earlier feedback incorporated here (${linked.length} items)`));
+    fold.append(el('p', '', 'Historical feedback stays attached to its original item. It does not approve this revised wording.'));
+    for (const { id, state } of linked) {
+      const block = el('section'); block.append(el('h4', '', id));
+      appendSavedHistory(block, state); fold.append(block);
+    }
+    card.append(fold);
+  }
+
+  function renderAppendices() {
+    const target = $('review-appendices');
+    if (!target) return;
+    target.replaceChildren();
+    const groups = [
+      ['Coordination appendix', data.coordination_appendix || [], 'Client timing and coordination are retained here, outside engineering approval totals.'],
+      ['Consolidated requirements and earlier feedback', data.superseded_appendix || [], 'These items are covered by a canonical requirement. Their original wording and review history remain available.'],
+    ];
+    target.hidden = !groups.some(([, entries]) => entries.length);
+    for (const [title, entries, description] of groups) {
+      if (!entries.length) continue;
+      const group = el('details', 'document-notes appendix-group');
+      group.append(el('summary', '', `${title} (${entries.length})`));
+      const body = el('div', 'document-notes-body'); body.append(el('p', '', description));
+      for (const entry of entries) {
+        const item = entry.original_requirement || entry;
+        const article = el('article', 'archive-card'); article.id = `archive-${entry.id}`;
+        article.append(el('h3', '', `${entry.id}: ${entry.title}`), el('p', '', entry.reason));
+        if (entry.superseded_by) article.append(el('p', 'archive-target', `Covered by ${entry.superseded_by}`));
+        if (entry.engineering_content_retained_in?.length) article.append(el('p', 'archive-target', `Technical checks retained in ${entry.engineering_content_retained_in.join(', ')}`));
+        const original = el('details', 'original-wording');
+        original.append(el('summary', '', `Original wording, revision ${entry.revision}`));
+        original.append(el('p', '', item.requested_outcome));
+        if (item.problem) original.append(el('p', '', item.problem));
+        const checks = el('ul');
+        for (const check of item.acceptance_checks || []) checks.append(el('li', '', check.text || check));
+        original.append(checks); article.append(original);
+        const state = token && saved ? saved.archived_items?.[entry.id] : null;
+        if (state) {
+          article.append(el('p', 'historical-status', `Historical status: ${labels[state.status] || 'Pending review'} at revision ${state.revision}. Excluded from active approval totals.`));
+          appendSavedHistory(article, state);
+        } else article.append(el('p', 'muted', token && saved ? 'Earlier review history is not available in this response.' : 'Open your secure review link to see earlier private feedback and review history.'));
+        body.append(article);
+      }
+      group.append(body); target.append(group);
+    }
+  }
+
+  function safeSourceLink(source) {
+    try {
+      const url = new URL(source.url);
+      if (url.protocol !== 'https:') return el('span', '', source.title);
+      const link = el('a', '', `${source.publisher}: ${source.title}`);
+      link.href = url.href; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      return link;
+    } catch (_) { return el('span', '', source.title || 'Source'); }
+  }
+
+  function populateQualityMechanism() {
+    const quality = data.quality_mechanism;
+    const target = $('quality-mechanism');
+    if (!target || !quality) return;
+    target.hidden = false; target.replaceChildren();
+    const fold = el('details', 'document-notes');
+    fold.append(el('summary', '', quality.title));
+    const body = el('div', 'document-notes-body');
+    body.append(el('p', 'quality-scope', quality.summary), el('p', 'muted', quality.classification));
+    const sources = new Map((quality.sources || []).map((source) => [source.id, source]));
+    for (const practice of quality.practices || []) {
+      const section = el('section', 'quality-practice');
+      section.append(el('h3', '', practice.outcome), el('p', '', practice.acceptance), el('span', 'source-tag', 'Adapted proposal for verification'));
+      const links = el('div', 'source-links');
+      for (const id of practice.source_ids || []) if (sources.has(id)) links.append(safeSourceLink(sources.get(id)));
+      section.append(links); body.append(section);
+    }
+    const references = el('details', 'source-reference-list');
+    references.append(el('summary', '', 'What the official sources support'));
+    for (const source of quality.sources || []) {
+      const section = el('section', 'source-reference'); section.append(safeSourceLink(source));
+      const claims = el('ul'); (source.supported_claims || []).forEach((claim) => claims.append(el('li', '', claim)));
+      section.append(claims);
+      for (const caveat of source.caveats || []) section.append(el('p', 'muted', caveat));
+      references.append(section);
+    }
+    body.append(references); fold.append(body); target.append(fold);
   }
 
   function showDialog(dialog) {
@@ -508,6 +628,13 @@
       changes_requested_requirement_ids: data.requirements.filter((item) => itemState(item).status === 'changes_requested').map((item) => item.id),
       approved_requirements: approved.map((item) => ({ ...item, status: 'approved', fingerprint: itemState(item).fingerprint,
         comments: itemState(item).comments, history: itemState(item).history || [], resolution: itemState(item).resolution || null })), feedback };
+    report.active_requirements = data.requirements;
+    report.original_requirements = data.original_requirements || data.requirements;
+    report.coordination_appendix = data.coordination_appendix || [];
+    report.superseded_appendix = data.superseded_appendix || [];
+    report.saved_item_states = saved.items;
+    report.archived_item_states = saved.archived_items || {};
+    report.quality_mechanism = data.quality_mechanism || null;
     let content;
     if (format === 'json') content = JSON.stringify(report, null, 2);
     else {
@@ -532,11 +659,40 @@
         item.comments.forEach((comment) => lines.push(`- ${timeLabel(comment.at)}: ${comment.kind === 'resolution' ? 'Review resolution: ' : ''}${comment.text}`, ''));
         if (item.resolution) lines.push('Review resolution: ' + item.resolution, '');
       });
-      content = clean(lines.join('\n'));
+      lines.push('## Complete current and historical record', '', 'Only active engineering requirements count toward approval totals. Historical statuses below do not approve revised wording.', '');
+      const formatWord = (value) => clean(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const versions = new Map();
+      for (const item of [...report.original_requirements, ...data.requirements]) versions.set(`${item.id}@${item.revision}`, item);
+      for (const item of versions.values()) {
+        lines.push(`### ${item.id}, revision ${item.revision}: ${formatWord(item.title)}`, '', formatWord(item.requested_outcome), '');
+        if (item.problem) lines.push(formatWord(item.problem), '');
+        for (const check of item.acceptance_checks || []) lines.push('- ' + formatWord(check.text || check));
+        lines.push('');
+      }
+      lines.push('## Complete saved review history', '');
+      for (const [scope, states] of [['Active', saved.items], ['Archived', saved.archived_items || {}]]) {
+        for (const [id, state] of Object.entries(states || {})) {
+          lines.push(`### ${scope}: ${id}`, '', `Saved status: ${labels[state.status] || state.status}. Requirement revision: ${state.revision}.`, '');
+          for (const comment of state.comments || []) lines.push(`- ${timeLabel(comment.at)} (${formatWord(comment.kind)}): ${formatWord(comment.text)}`, '');
+          for (const event of state.history || []) {
+            lines.push(`- History: ${timeLabel(event.at)}, ${formatWord(event.action)}, requirement revision ${event.revision}.`);
+            if (event.text) lines.push('  ' + formatWord(event.text));
+          }
+          if (state.resolution) lines.push('Resolution: ' + formatWord(state.resolution));
+          lines.push('');
+        }
+      }
+      lines.push('## Scope dispositions', '');
+      for (const entry of historicalEntries()) lines.push(`- ${entry.id}: ${formatWord(entry.reason)}${entry.superseded_by ? ' Covered by ' + entry.superseded_by + '.' : ''}`);
+      const auditRecord = JSON.stringify({ original_requirements: report.original_requirements, active_requirements: data.requirements, saved_item_states: saved.items, archived_item_states: saved.archived_items || {} }, null, 2);
+      const longestFence = Math.max(2, ...[...auditRecord.matchAll(/`+/g)].map((match) => match[0].length));
+      const fence = '`'.repeat(longestFence + 1);
+      lines.push('', '## Exact saved record', '', 'This private audit appendix preserves all original fields and event identifiers.', '', fence + 'json', auditRecord, fence);
+      content = lines.join('\n');
     }
     const blob = new Blob([content], { type: format === 'json' ? 'application/json;charset=utf-8' : 'text/markdown;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    const link = el('a'); link.href = url; link.download = `algoveda-approved-review-r${config.document_revision}.${format === 'json' ? 'json' : 'md'}`;
+    const link = el('a'); link.href = url; link.download = `algoveda-complete-review-r${config.document_revision}.${format === 'json' ? 'json' : 'md'}`;
     document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     document.querySelector('.export-menu').open = false;
   }
@@ -620,6 +776,7 @@
       } catch (_) { incomingToken = null; token = null; }
       populateCategories();
       populateDecisions();
+      populateQualityMechanism();
       $('review-layout').hidden = false;
       render();
       if (revisionMismatch) notice('This page and its review version do not match. Reload the page before making decisions.', 'warning', true);
