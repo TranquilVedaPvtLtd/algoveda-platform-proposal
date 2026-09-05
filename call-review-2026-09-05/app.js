@@ -146,7 +146,7 @@
     if (state.stale) top.append(el('p', 'revision-note', 'This wording has changed since the previous review. Please review it again. Earlier feedback is retained.'));
     if (item.clarification_required || item.comments_needed || state.clarification_required || state.comments_needed) {
       const decision = el('p', 'decision-note');
-      decision.append(el('strong', '', 'Please clarify: '), document.createTextNode(clean(item.comment_prompt || item.decision_needed || 'Add a short note confirming this decision before approval.')));
+      decision.append(el('strong', '', state.status === 'approved' ? 'Decision reviewed: ' : 'Please clarify: '), document.createTextNode(clean(item.comment_prompt || item.decision_needed || 'Add a short note confirming this decision before approval.')));
       top.append(decision);
     }
     card.append(top);
