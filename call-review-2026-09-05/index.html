@@ -24,9 +24,9 @@
     <section class="intro" aria-labelledby="page-title">
       <div class="intro-copy">
         <p class="eyebrow">Call review <span class="date-label">Prepared 5 September 2026</span></p>
-        <h1 id="page-title">From our call<br>to a shared plan.</h1>
-        <p class="intro-text">Review each requirement. Approve the wording, or tell us what should change.</p>
-        <p class="scope-note">Approval confirms the proposed work. It does not confirm completion or authorise deployment or live trading.</p>
+        <h1 id="page-title">A focused plan.<br>With feedback preserved.</h1>
+        <p class="intro-text">Review 15 engineering requirements. Seven previously approved items keep their wording; changed items need a fresh review.</p>
+        <p class="scope-note">Earlier feedback is retained. Coordination and consolidated items are in the appendices and do not count toward engineering approval. Approval confirms scope, not completion or live readiness.</p>
       </div>
       <div class="progress-card" aria-labelledby="progress-title">
         <div class="progress-top"><h2 id="progress-title">Your review</h2><span id="progress-percent">0%</span></div>
@@ -52,7 +52,7 @@
         <section class="toolbar" aria-label="Find requirements">
           <label class="search-field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Search requirements</span><input id="search" type="search" placeholder="Search a requirement..." autocomplete="off"></label>
           <label class="mobile-category"><span class="sr-only">Category</span><select id="category-select"><option value="all">All categories</option></select></label>
-          <details class="export-menu"><summary class="button secondary">Export review <span aria-hidden="true">↓</span></summary><div class="export-options"><p>Saved approvals and feedback only.</p><button id="export-markdown">Download readable summary (.md)</button><button id="export-json">Download review data (.json)</button></div></details>
+          <details class="export-menu"><summary class="button secondary">Export review <span aria-hidden="true">↓</span></summary><div class="export-options"><p>Saved review, original wording and full history.</p><button id="export-markdown">Download readable summary (.md)</button><button id="export-json">Download review data (.json)</button></div></details>
         </section>
         <div class="status-tabs" role="group" aria-label="Filter by review status">
           <button data-status="all" class="status-tab active" aria-pressed="true">All <span id="count-all">0</span></button>
@@ -60,12 +60,14 @@
           <button data-status="approved" class="status-tab" aria-pressed="false">Approved <span id="count-approved">0</span></button>
           <button data-status="changes_requested" class="status-tab" aria-pressed="false">Changes requested <span id="count-changes">0</span></button>
         </div>
-        <div class="list-heading"><div><h2 id="list-title">All requirements</h2><p id="result-count"></p></div><label class="select-visible"><input id="select-visible" type="checkbox">Select eligible items</label></div>
+        <div class="list-heading"><div><h2 id="list-title">Engineering requirements</h2><p id="result-count"></p></div><label class="select-visible"><input id="select-visible" type="checkbox">Select eligible items</label></div>
         <div id="requirements" class="requirements" tabindex="-1" aria-label="Requirements"></div>
         <div id="no-results" class="empty-state" hidden><h3>No matching requirements</h3><p>Try another search, category or review status.</p><button class="text-button" id="no-results-reset">Clear filters</button></div>
         <p class="review-end">A comment reopens an approval. If the wording changes, the revised requirement needs a fresh review.</p>
       </div>
     </div>
+    <section id="review-appendices" class="review-appendices" aria-label="Earlier requirements and feedback" hidden></section>
+    <section id="quality-mechanism" class="quality-mechanism" aria-label="Proposed verification approach and sources" hidden></section>
   </main>
 
   <div id="bulk-bar" class="bulk-bar" hidden><span><strong id="selected-count">0</strong> selected <small>Pending items without feedback or an open decision</small></span><div><button id="clear-selection" class="button secondary">Clear</button><button id="approve-selected" class="button primary">Approve selected</button></div></div>

@@ -149,7 +149,7 @@ class ReviewStore:
                                    (item["revision"], item["fingerprint"], int(item["clarification_required"]), item_id))
                 self.event(connection, item_id, "revision_changed", "The requirement changed and needs a fresh review.", manifest, at=at)
         for item_id in previous.keys() - manifest["items"].keys():
-            connection.execute("UPDATE items SET active=0,status='pending' WHERE id=?", (item_id,))
+            connection.execute("UPDATE items SET active=0 WHERE id=?", (item_id,))
         if document is not None:
             connection.execute("UPDATE document SET revision=?,fingerprint=?,version=version+1,updated_at=? WHERE singleton=1",
                                (canonical(manifest["revision"]), manifest["fingerprint"], at))
@@ -157,8 +157,8 @@ class ReviewStore:
     @staticmethod
     def snapshot(connection):
         document = connection.execute("SELECT * FROM document").fetchone()
-        items = {}
-        for row in connection.execute("SELECT * FROM items WHERE active=1 ORDER BY id"):
+        items, archived_items = {}, {}
+        for row in connection.execute("SELECT * FROM items ORDER BY id"):
             history, comments = [], []
             for event in connection.execute("SELECT * FROM events WHERE item_id=? ORDER BY seq", (row["id"],)):
                 record = {"id": event["id"], "action": event["action"], "at": event["at"],
@@ -171,13 +171,15 @@ class ReviewStore:
                                          "kind": event["action"], "revision": event["item_revision"]})
                 history.append(record)
             unresolved = connection.execute("SELECT action FROM events WHERE item_id=? AND action IN ('request_changes','comment','resolution') ORDER BY seq DESC LIMIT 1", (row["id"],)).fetchone()
-            items[row["id"]] = {"status": row["status"], "revision": row["revision"],
+            destination = items if row["active"] else archived_items
+            destination[row["id"]] = {"status": row["status"], "revision": row["revision"],
                                 "fingerprint": row["fingerprint"],
                                 "clarification_required": bool(row["clarification_required"]),
                                 "resolution_required": bool(row["clarification_required"] or (unresolved and unresolved["action"] != "resolution")),
                                 "comments": comments, "history": history}
         return {"document_id": document["document_id"], "document_revision": json.loads(document["revision"]),
-                "version": document["version"], "items": items, "updated_at": document["updated_at"]}
+                "version": document["version"], "items": items, "archived_items": archived_items,
+                "updated_at": document["updated_at"]}
 
     def get_state(self, document_id):
         manifest = load_manifest(self.manifest_path)
