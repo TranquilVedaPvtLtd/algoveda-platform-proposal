@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#10263b">
+  <title>AlgoVeda | Requirements for review | TranquilVeda</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#requirements">Skip to requirements</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../" aria-label="TranquilVeda home"><svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M3 6h7l6 13 6-13h7L16 29z" fill="currentColor"/><path d="M13 5h6l-3 7z" fill="#00b56d"/></svg><span>TranquilVeda</span></a>
+      <span class="header-context">AlgoVeda <span aria-hidden="true">/</span> Shared review</span>
+      <button id="end-session" class="text-button" hidden>End review session</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow">Call review <span class="date-label">Prepared 5 September 2026</span></p>
+        <h1 id="page-title">From our call<br>to a shared plan.</h1>
+        <p class="intro-text">Review each requirement. Approve the wording, or tell us what should change.</p>
+        <p class="scope-note">Approval confirms the proposed work. It does not confirm completion or authorise deployment or live trading.</p>
+      </div>
+      <div class="progress-card" aria-labelledby="progress-title">
+        <div class="progress-top"><h2 id="progress-title">Your review</h2><span id="progress-percent">0%</span></div>
+        <p class="progress-number"><strong id="approved-number">0</strong><span id="total-number">of 0 approved</span></p>
+        <progress id="review-progress" max="100" value="0" aria-label="Requirements approved">0%</progress>
+        <div class="progress-breakdown"><span><i class="dot pending-dot"></i><span id="pending-number">0 pending</span></span><span><i class="dot change-dot"></i><span id="changes-number">0 need changes</span></span></div>
+        <p id="sync-label" class="sync-label">Loading the review...</p>
+      </div>
+    </section>
+
+    <div id="connection-banner" class="notice" role="status" aria-live="polite"><span id="connection-text">Opening the requirements...</span><div class="notice-actions"><button id="retry-save" class="text-button" hidden>Retry save</button><button id="refresh-state" class="text-button" hidden>Refresh review</button></div></div>
+    <div id="load-error" class="empty-state" hidden><h2>The requirements could not be opened.</h2><p>Please try again. No review decisions have changed.</p><button id="reload-page" class="button primary">Try again</button></div>
+
+    <div id="review-layout" class="review-layout" hidden>
+      <aside class="review-sidebar" aria-label="Review categories">
+        <h2>In this review</h2>
+        <nav id="category-nav" class="category-nav" aria-label="Filter by category"></nav>
+        <div class="sidebar-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m7 12 3 3 7-7"/><rect x="3" y="3" width="18" height="18" rx="5"/></svg><p>Review at your own pace.<br>Saved decisions are shared with the project team.</p></div>
+        <button id="clear-filters" class="text-button">Reset filters</button>
+      </aside>
+
+      <div class="review-content">
+        <section class="toolbar" aria-label="Find requirements">
+          <label class="search-field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Search requirements</span><input id="search" type="search" placeholder="Search a requirement..." autocomplete="off"></label>
+          <label class="mobile-category"><span class="sr-only">Category</span><select id="category-select"><option value="all">All categories</option></select></label>
+          <details class="export-menu"><summary class="button secondary">Export review <span aria-hidden="true">↓</span></summary><div class="export-options"><p>Saved approvals and feedback only.</p><button id="export-markdown">Download readable summary (.md)</button><button id="export-json">Download review data (.json)</button></div></details>
+        </section>
+        <div class="status-tabs" role="group" aria-label="Filter by review status">
+          <button data-status="all" class="status-tab active" aria-pressed="true">All <span id="count-all">0</span></button>
+          <button data-status="pending" class="status-tab" aria-pressed="false">Pending <span id="count-pending">0</span></button>
+          <button data-status="approved" class="status-tab" aria-pressed="false">Approved <span id="count-approved">0</span></button>
+          <button data-status="changes_requested" class="status-tab" aria-pressed="false">Changes requested <span id="count-changes">0</span></button>
+        </div>
+        <div class="list-heading"><div><h2 id="list-title">All requirements</h2><p id="result-count"></p></div><label class="select-visible"><input id="select-visible" type="checkbox">Select eligible items</label></div>
+        <div id="requirements" class="requirements" tabindex="-1" aria-label="Requirements"></div>
+        <div id="no-results" class="empty-state" hidden><h3>No matching requirements</h3><p>Try another search, category or review status.</p><button class="text-button" id="no-results-reset">Clear filters</button></div>
+        <p class="review-end">A comment reopens an approval. If the wording changes, the revised requirement needs a fresh review.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="bulk-bar" class="bulk-bar" hidden><span><strong id="selected-count">0</strong> selected <small>Pending items without feedback or an open decision</small></span><div><button id="clear-selection" class="button secondary">Clear</button><button id="approve-selected" class="button primary">Approve selected</button></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <dialog id="feedback-dialog" class="review-dialog" aria-labelledby="feedback-title">
+    <form id="feedback-form">
+      <div class="dialog-heading"><span id="feedback-id" class="item-id"></span><button type="button" class="icon-button close-dialog" aria-label="Close feedback">×</button></div>
+      <h2 id="feedback-title">Add feedback</h2>
+      <p id="feedback-subtitle" class="muted"></p>
+      <div class="feedback-switch" role="group" aria-label="Feedback type"><button type="button" id="mode-comment" aria-pressed="true">Add a comment</button><button type="button" id="mode-change" aria-pressed="false">Propose a change</button></div>
+      <label for="feedback-text" id="feedback-label">Your comment</label>
+      <textarea id="feedback-text" rows="4" maxlength="4000" required placeholder="What would you like us to clarify?"></textarea>
+      <div id="proposed-wording-wrap" hidden><label for="proposed-wording">Suggested wording <span class="optional">(optional)</span></label><textarea id="proposed-wording" rows="4" maxlength="4000" placeholder="Write how you would like the requirement to read."></textarea><p class="field-help">The original requirement stays unchanged. Your suggestion is saved as feedback for the team. Keep feedback and suggested wording within 4,000 characters in total.</p></div>
+      <p class="field-help">New feedback reopens any approval for this requirement. Please leave out passwords, private account numbers and personal financial information.</p>
+      <p id="feedback-error" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button type="button" class="button secondary close-dialog">Cancel</button><button id="submit-feedback" type="submit" class="button primary">Save comment</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="approve-dialog" class="review-dialog" aria-labelledby="approve-title">
+    <form id="approve-form"><div class="dialog-heading"><span class="item-id">Review confirmation</span><button type="button" class="icon-button close-dialog" aria-label="Close approval confirmation">×</button></div><h2 id="approve-title">Approve selected requirements?</h2><p id="approve-description" class="muted"></p><ul id="approve-list" class="approve-list"></ul><div id="resolution-wrap" hidden><label for="resolution">How has the feedback been addressed?</label><textarea id="resolution" rows="3" maxlength="4000" placeholder="Explain the resolution, or why the current wording is acceptable after review."></textarea></div><label class="confirm-check"><input id="approve-confirm" type="checkbox" required><span id="approve-confirm-label">I have read these requirements and agree with the proposed wording and checks.</span></label><p id="approve-error" class="form-error" role="alert" hidden></p><div class="dialog-actions"><button type="button" class="button secondary close-dialog">Cancel</button><button type="submit" id="confirm-approve" class="button primary">Confirm approval</button></div></form>
+  </dialog>
+
+  <footer class="site-footer"><span>TranquilVeda <span aria-hidden="true">·</span> AlgoVeda</span><span>Requirements review <span id="document-version"></span></span></footer>
+  <noscript><div class="notice">JavaScript is needed to load this review and save decisions.</div></noscript>
+</body>
+</html>

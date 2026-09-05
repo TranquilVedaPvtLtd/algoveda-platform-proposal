@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.sqlite*
+*.db*
+access.json
+review-access.md
+data/
+.DS_Store
