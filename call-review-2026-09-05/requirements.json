@@ -1,0 +1,1858 @@
+{
+  "document_id": "algoveda-call-2026-09-05",
+  "document_revision": 1,
+  "prepared_date": "2026-09-05",
+  "document_title": "AlgoVeda requirements for review",
+  "summary": "Review 27 requirements from the call and one separately sourced tracker model-policy item. Trading reliability comes first, followed by backtesting and paper history, then the AI improvement pilot. Linked development work still needs verification against these outcomes.",
+  "categories": [
+    "Trading reliability",
+    "Testing and delivery",
+    "Backtesting and paper trading",
+    "AI strategy improvement",
+    "AI capability and model routing"
+  ],
+  "category_counts": {
+    "Trading reliability": 6,
+    "Testing and delivery": 6,
+    "Backtesting and paper trading": 5,
+    "AI strategy improvement": 8,
+    "AI capability and model routing": 3
+  },
+  "priority_legend": {
+    "P0": "Trading reliability and readiness",
+    "P1": "Core workflows, coordination and existing model routing",
+    "P2": "AI improvement and capability verification"
+  },
+  "review_notes": [
+    "Items marked Comments needed contain an important choice to confirm.",
+    "Checks marked proposed verification are suggested ways to demonstrate the result; added safeguards are identified separately.",
+    "Timestamps identify approximate call sections. ROUTE-001 comes from earlier user instructions.",
+    "The improvement percentages are research aspirations to evaluate, not guaranteed results.",
+    "Merged or open tracker work remains linked until the requested behaviour is revalidated."
+  ],
+  "requirements": [
+    {
+      "id": "CALL-001",
+      "category": "Trading reliability",
+      "priority": "P0",
+      "title": "Complete every required protective exit",
+      "problem": "A reported stop-loss closed only part of a position, leaving the rest for manual intervention.",
+      "requested_outcome": "Complete and confirm the intended protective exit for the affected strategy’s full remaining quantity, without closing another strategy’s position.",
+      "source_classification": [
+        "reported_incident",
+        "explicit_request"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": "Reported incomplete protective exit; the cause is not verified.",
+      "hypothesized_causes": [
+        "Shared handling, delayed updates and deployment changes were discussed as possible explanations."
+      ],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 3,
+          "time_range": "00:09:10–00:13:20",
+          "summary": "The caller reported that half the intended quantity had not exited.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 4,
+          "time_range": "00:13:20–00:17:50",
+          "summary": "The caller emphasized that missed stop-loss execution was unacceptable.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Check that the reported partial-exit case closes the full intended quantity in a controlled test.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Test partial fills, delayed updates and an interrupted exit, including how the remaining quantity is identified and handled.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Distinguish an exit request, a partial fill and a confirmed full exit.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-003",
+        "CALL-005"
+      ],
+      "decision_needed": null,
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-002",
+      "category": "Trading reliability",
+      "priority": "P0",
+      "title": "Prevent one strategy from blocking another valid entry",
+      "problem": "Similar strategies operating together were reported to miss valid entries, including on previously working accounts.",
+      "requested_outcome": "Process each eligible strategy entry independently and explain any valid rejection or delay.",
+      "source_classification": [
+        "reported_incident",
+        "explicit_request",
+        "developer_commitment"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": "Reported missed entries when similar strategies operated together.",
+      "hypothesized_causes": [
+        "The other strategy’s quantity or a delayed update may have affected a safety check."
+      ],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 2,
+          "time_range": "00:04:37–00:09:10",
+          "summary": "The speakers described missed entries when similar strategies ran together and committed to correcting the platform behaviour.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Test simultaneous entries for two strategies on the same instrument and account, with either strategy confirmed first.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Confirm both eligible entries complete once each; retain real safety checks and clear reasons for rejection.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Repeat across more than one affected configuration.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-003",
+        "CALL-004",
+        "CALL-005"
+      ],
+      "decision_needed": null,
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-003",
+      "category": "Trading reliability",
+      "priority": "P0",
+      "title": "Keep even identical strategies independent",
+      "problem": "Strategies that share an account and instrument must not interfere with one another.",
+      "requested_outcome": "Keep each strategy independent even when its entry rules, exits, stops, quantity and account are identical to another strategy.",
+      "source_classification": [
+        "explicit_request",
+        "developer_commitment"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 6,
+          "time_range": "00:22:17–00:26:26",
+          "summary": "The client asked for completely identical strategies to behave independently.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 10,
+          "time_range": "00:40:14–00:44:18",
+          "summary": "The client said one strategy’s stop-loss must not exit another strategy.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Test two identical strategies together and track their entries, quantities, protection and exits separately.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "An exit in one strategy must not close or remove protection from the other.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Repeat with different stop-loss and exit rules and newly added similar strategies.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [],
+      "decision_needed": "Approve independent behaviour; choose the technical design after investigating.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-004",
+      "category": "Trading reliability",
+      "priority": "P0",
+      "title": "Send each strategy the updates it needs",
+      "problem": "A speaker suggested that one strategy may receive an update that another also needs, leaving the second unable to act.",
+      "requested_outcome": "Deliver relevant updates to every intended strategy, with each acting only on its own position and instructions.",
+      "source_classification": [
+        "explicit_requested_outcome",
+        "proposed_design_in_call"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [
+        "One strategy consuming an update needed by another was suggested but not proven."
+      ],
+      "proposed_approaches": [
+        "The call suggested distributing relevant updates to both strategies for independent assessment."
+      ],
+      "evidence": [
+        {
+          "section": 4,
+          "time_range": "00:13:20–00:17:50",
+          "summary": "The conversation proposed giving both strategy versions the relevant incoming update for independent assessment.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 10,
+          "time_range": "00:40:14–00:44:18",
+          "summary": "The client asked that each strategy check whether an update belongs to it.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Show that each intended strategy receives the relevant update and identifies its own action.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Test delayed, repeated and out-of-order updates without missed actions or duplicate orders.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Distributing an update to several strategies must not create extra broker orders.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-003"
+      ],
+      "decision_needed": "Validate the cause before choosing an update-routing design.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-005",
+      "category": "Trading reliability",
+      "priority": "P0",
+      "title": "Match shared broker positions to the correct strategies",
+      "problem": "The broker may show a combined position while the platform needs to know each strategy’s share.",
+      "requested_outcome": "Keep each strategy’s quantity accurate when several strategies share an account and instrument, while preserving safety checks.",
+      "source_classification": [
+        "explicit_requested_outcome",
+        "proposed_design_in_call"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [
+        "Combined broker quantity and shared processing were discussed as possible sources of interference."
+      ],
+      "proposed_approaches": [
+        "Keep an accurate platform record of each strategy’s actions and quantity."
+      ],
+      "evidence": [
+        {
+          "section": 5,
+          "time_range": "00:17:50–00:22:17",
+          "summary": "The speakers noted that the broker does not label a combined position by strategy version and discussed distinguishing the strategies within the platform.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Match the combined broker quantity to the quantities assigned to the relevant strategies during entries, partial fills and exits.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Test a manual exit without assigning its effect to an unrelated strategy.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Keep any unexplained difference visible instead of assuming that all positions are closed or bypassing a safety check.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-003"
+      ],
+      "decision_needed": null,
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-006",
+      "category": "Trading reliability",
+      "priority": "P0",
+      "title": "Test all important similar-strategy combinations",
+      "problem": "The client asked for a broader review instead of repeatedly repairing only the latest symptom.",
+      "requested_outcome": "Test the meaningful combinations of similar strategies before declaring the reliability work complete.",
+      "source_classification": [
+        "explicit_request",
+        "developer_commitment"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 3,
+          "time_range": "00:09:10–00:13:20",
+          "summary": "The client requested a broad review of similar-strategy combinations and additional possible failures.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 8,
+          "time_range": "00:30:54–00:35:24",
+          "summary": "The developer described the intended result as reliable operation for newly added similar strategies too.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Cover identical and different rules, simultaneous and staggered entries, both update orders, partial exits, manual exits and multiple accounts.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Add a repeatable check for every reproduced incident, including missed entries and incomplete exits.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Check correctness and response time under realistic delays; efficiency must not hide failures.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-001",
+        "CALL-002",
+        "CALL-003",
+        "CALL-004",
+        "CALL-005"
+      ],
+      "decision_needed": "Confirm the proposed test coverage.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-007",
+      "category": "Testing and delivery",
+      "priority": "P0",
+      "title": "Review how each change affects existing features",
+      "problem": "The client wants likely interactions considered before a change creates another operational problem.",
+      "requested_outcome": "Before implementation, identify how the change could affect existing behaviour and how existing behaviour could affect the new change.",
+      "source_classification": [
+        "explicit_request"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 10,
+          "time_range": "00:40:14–00:44:18",
+          "summary": "The client asked for a two-way impact review between a new change and previously implemented behaviour.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Record the affected workflows and likely interaction problems.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Check previous supported behaviour as well as the new feature’s expected result.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [],
+      "decision_needed": null,
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-008",
+      "category": "Testing and delivery",
+      "priority": "P0",
+      "title": "Finish testing before declaring readiness",
+      "problem": "An earlier testing cycle was described as stopping with unresolved issues.",
+      "requested_outcome": "Complete the required integration and regression checks before declaring readiness. Delay the change when more review or testing is needed.",
+      "source_classification": [
+        "explicit_request",
+        "explicit_agreement",
+        "developer_commitment"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 8,
+          "time_range": "00:30:54–00:35:24",
+          "summary": "The call described an earlier testing cycle leaving issues unresolved.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 11,
+          "time_range": "00:44:18–00:48:49",
+          "summary": "The speakers emphasized completing integration testing and preserving existing behaviour.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 10,
+          "time_range": "00:40:14–00:44:18",
+          "summary": "The client allowed delaying a change by a day if more review or testing was needed.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Report the checks completed, results and anything unfinished.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Do not declare readiness while required checks or critical failures remain unresolved.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Explain any delay and give a revised readiness checkpoint.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-006",
+        "CALL-007"
+      ],
+      "decision_needed": "Allow extra time when a specific change needs more review or testing.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-009",
+      "category": "Testing and delivery",
+      "priority": "P0",
+      "title": "Give a clear readiness decision for the trading fixes",
+      "problem": "The client said continuing on the platform was not worthwhile while the reliability problem remained unresolved.",
+      "requested_outcome": "Prioritize the similar-strategy fixes and give an evidence-based readiness decision before the next intended trading session.",
+      "source_classification": [
+        "explicit_priority",
+        "developer_commitment",
+        "client_stated_condition"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 6,
+          "time_range": "00:22:17–00:26:26",
+          "summary": "Reliability fixes were given high priority, with a weekend commitment and concern about continuing while unresolved.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 8,
+          "time_range": "00:30:54–00:35:24",
+          "summary": "The developer said readiness would be communicated before the intended Monday session.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "State what was reproduced, fixed and tested, and what remains unresolved.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Give the responsible operator the evidence needed for the trading-readiness decision.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-001",
+        "CALL-002",
+        "CALL-008"
+      ],
+      "decision_needed": null,
+      "timing": {
+        "type": "historical_call_relative",
+        "phrases": [
+          "today/tomorrow",
+          "before Monday"
+        ],
+        "note": "Original call timing. Confirm current status and the next agreed date."
+      },
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-010",
+      "category": "Testing and delivery",
+      "priority": "P1",
+      "title": "Agree a maintenance and testing window",
+      "problem": "Unclear trading-end times were delaying the start of a full testing cycle.",
+      "requested_outcome": "Have the operator notify the developer when trading has finished or is paused, then agree when maintenance and testing can begin.",
+      "source_classification": [
+        "explicit_proposal",
+        "explicit_agreement"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 10,
+          "time_range": "00:40:14–00:44:18",
+          "summary": "The client offered to report when trading had finished or been paused, and the developer agreed this would help.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 11,
+          "time_range": "00:44:18–00:48:49",
+          "summary": "Earlier notice was linked to completing the full testing cycle.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Agree who announces the available window, who confirms it and when testing is expected to finish.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Before disruptive work, check open positions and pending orders separately; a pause alone does not prove they are closed.",
+          "basis": "inferred_guardrail_for_approval"
+        }
+      ],
+      "dependencies": [
+        "CALL-008"
+      ],
+      "decision_needed": "Agree the window procedure and responsible roles; the call did not establish a fixed daily time.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-011",
+      "category": "Backtesting and paper trading",
+      "priority": "P1",
+      "title": "Show whether backtests match the comparable paper history",
+      "problem": "The client reported mismatches, while another speaker said the periods matched. The disagreement needs a shared comparison.",
+      "requested_outcome": "Compare the same strategy, period and assumptions across the available July, August and September examples; explain or correct differences.",
+      "source_classification": [
+        "reported_incident",
+        "explicit_request",
+        "disputed_existing_claim"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": "The client reported mismatches; another speaker reported matching results. The shared evidence needs review.",
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 6,
+          "time_range": "00:22:17–00:26:26",
+          "summary": "The client reported older-period backtest results that did not match.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 7,
+          "time_range": "00:26:26–00:30:54",
+          "summary": "Another speaker said the July, August and September comparisons already matched.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Agree the exact strategy version, dates, configuration, data and execution assumptions.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Compare entries, exits, quantities, outcomes and summary results, listing every unexplained difference.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Explain valid differences and missing data; a matching total alone is not enough.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [],
+      "decision_needed": "Identify the exact strategy version, comparison report, dates, data and settings to use as the shared baseline.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": true,
+      "comment_prompt": "Identify the exact strategy version, comparison report, dates, data and settings to use as the shared baseline.",
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": true,
+      "clarification_group": "comparison_dataset"
+    },
+    {
+      "id": "CALL-012",
+      "category": "Backtesting and paper trading",
+      "priority": "P1",
+      "title": "Validate longer histories and more than one strategy",
+      "problem": "A few matching recent trades from one strategy did not address the client’s concern about older periods and other strategies.",
+      "requested_outcome": "Use representative strategies with a larger available paper history and compare older as well as recent periods.",
+      "source_classification": [
+        "explicit_request"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 7,
+          "time_range": "00:26:26–00:30:54",
+          "summary": "The client asked for a larger available trade history and more than one strategy, rather than a few matching recent examples.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Agree a representative strategy set, including an available history of roughly 30 to 50 trades as requested.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Include the disputed older period and a second strategy or configuration; state actual coverage and missing data.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-011"
+      ],
+      "decision_needed": "Confirm the representative strategy set and the older-period history to test.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": true,
+      "comment_prompt": "Confirm the representative strategy set and the older-period history to test.",
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": true,
+      "clarification_group": "comparison_dataset"
+    },
+    {
+      "id": "CALL-013",
+      "category": "Backtesting and paper trading",
+      "priority": "P1",
+      "title": "Restore usable paper-trade history and filters",
+      "problem": "The user reported being unable to select an account or strategy and unable to see earlier paper-trade results.",
+      "requested_outcome": "Allow the user to choose an authorized account and strategy and reliably open its available paper-trade history.",
+      "source_classification": [
+        "reported_incident",
+        "explicit_requested_outcome"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": "The user reported unavailable filters and history during the call.",
+      "hypothesized_causes": [
+        "An update in progress was offered as the explanation; actual data loss was not established."
+      ],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 8,
+          "time_range": "00:30:54–00:35:24",
+          "summary": "During the call, the user could not select an account or strategy.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 7,
+          "time_range": "00:26:26–00:30:54",
+          "summary": "The user reported being unable to see a previous paper-trade result.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Check both selectors and open a known completed paper-trade result.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "After an update or refresh, the same available selections and results remain usable.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Show the difference between no matching data, a loading failure and maintenance.",
+          "basis": "inferred_guardrail_for_approval"
+        }
+      ],
+      "dependencies": [],
+      "decision_needed": null,
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-014",
+      "category": "Backtesting and paper trading",
+      "priority": "P1",
+      "title": "Share the exact comparison reports for review",
+      "problem": "The client did not know which report to inspect when the speakers disagreed about matching results.",
+      "requested_outcome": "Provide the relevant comparison report with enough detail for the client to identify and review it.",
+      "source_classification": [
+        "explicit_request"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 7,
+          "time_range": "00:26:26–00:30:54",
+          "summary": "The client requested a message identifying the exact report to inspect.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Provide a report link or clear identifier, strategy version, period and concise explanation of the result.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Confirm the intended reviewer can open it; keep detailed account information in the private report.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-011",
+        "CALL-012",
+        "CALL-013"
+      ],
+      "decision_needed": "Agree the report and recipient.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-015",
+      "category": "Backtesting and paper trading",
+      "priority": "P1",
+      "title": "Make supported strategies usable in backtesting and paper trading",
+      "problem": "The client could not continue strategy development because these workflows were not dependable.",
+      "requested_outcome": "Allow the user to run the supported strategy set in backtesting and paper trading and inspect completed results.",
+      "source_classification": [
+        "explicit_request",
+        "developer_commitment"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 13,
+          "time_range": "00:53:20–00:57:50",
+          "summary": "The client asked to be able to backtest any supported strategy that evening; the response included paper trading.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Run each agreed supported strategy through the relevant workflow and open its result.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Explain unsupported settings or insufficient history instead of silently omitting a result.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-011",
+        "CALL-012",
+        "CALL-013"
+      ],
+      "decision_needed": null,
+      "timing": {
+        "type": "historical_call_relative",
+        "phrases": [
+          "by that evening"
+        ],
+        "note": "Original call timing. Confirm current status and the next agreed date."
+      },
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-016",
+      "category": "Testing and delivery",
+      "priority": "P1",
+      "title": "Plan time for incidents and remaining delivery work",
+      "problem": "Operational issues were repeatedly displacing the remaining work, especially backtesting.",
+      "requested_outcome": "Provide a realistic plan for urgent fixes and the remaining agreed modules, with owners and checkpoints.",
+      "source_classification": [
+        "explicit_request"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 7,
+          "time_range": "00:26:26–00:30:54",
+          "summary": "The client asked that incident work not repeatedly interrupt the remaining development work.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 8,
+          "time_range": "00:30:54–00:35:24",
+          "summary": "The client asked for more time to be allocated to getting the platform usable.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "List incident work and remaining delivery work with owners and checkpoints.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Explain any capacity conflict and revised sequence so other agreed work does not disappear.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-009",
+        "CALL-015"
+      ],
+      "decision_needed": "Agree owners and capacity; no staffing count or budget was decided.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-017",
+      "category": "Testing and delivery",
+      "priority": "P1",
+      "title": "Give a concrete status update and call-back",
+      "problem": "The client asked for timely contact and enough detail to know what had been resolved and which tools were usable.",
+      "requested_outcome": "Notify the client when the reliability work is ready and give the agreed update on findings, fixes, tool availability and next steps.",
+      "source_classification": [
+        "explicit_request",
+        "developer_commitment"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 7,
+          "time_range": "00:26:26–00:30:54",
+          "summary": "The developer promised a message when the reliability issue was resolved.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 13,
+          "time_range": "00:53:20–00:57:50",
+          "summary": "The client requested an evening call explaining tool availability, findings and the next correction step.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Distinguish diagnosed, fixed, tested, usable and still blocked.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "State which backtesting and paper-trading functions the client can use and the next checkpoint.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Agree the update owner and current call-back time.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-009",
+        "CALL-014",
+        "CALL-015"
+      ],
+      "decision_needed": null,
+      "timing": {
+        "type": "historical_call_relative",
+        "phrases": [
+          "that evening, before the speaker’s engagement"
+        ],
+        "note": "Original call timing. Confirm current status and the next agreed date."
+      },
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-018",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Provide a clear strategy-improvement workspace",
+      "problem": "The client wants a practical way to improve an existing strategy beyond a general chat or standalone backtest.",
+      "requested_outcome": "Provide a workspace where the user selects an existing strategy and baseline history, then asks for evaluated improvements in plain language.",
+      "source_classification": [
+        "explicit_request"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 12,
+          "time_range": "00:48:49–00:53:20",
+          "summary": "The client requested a strategy-improvement module or tab and a facility to select an existing strategy.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "The user can select a strategy and see which baseline and history the analysis uses.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Results explain the proposed change, measured comparison and limitations clearly.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-015",
+        "CALL-019",
+        "CALL-020",
+        "CALL-022"
+      ],
+      "decision_needed": "Should the pilot be the first step toward a dedicated improvement tab, or is the skill/chat experience sufficient?",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": true,
+      "comment_prompt": "Should the pilot be the first step toward a dedicated improvement tab, or is the skill/chat experience sufficient?",
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": true,
+      "clarification_group": "module_or_pilot"
+    },
+    {
+      "id": "CALL-019",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Keep the supplied strategy entries fixed",
+      "problem": "The client has already developed the entry logic and wants AI to improve what happens after entry.",
+      "requested_outcome": "Use the supplied complete strategy and history as the baseline. Keep entry rules and entry points unchanged while evaluating exits.",
+      "source_classification": [
+        "explicit_constraint"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 12,
+          "time_range": "00:48:49–00:53:20",
+          "summary": "The client repeatedly said to leave entries untouched and offered the complete strategy and inputs.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Keep entry logic and the same baseline entry set in every candidate.",
+          "basis": "explicit_call_criterion"
+        },
+        {
+          "text": "Record the strategy version, settings and dataset so the comparison can be repeated.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Make missing or excluded data visible; do not quietly remove entries to improve results.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-011"
+      ],
+      "decision_needed": "Entries were repeatedly fixed in the request, but a later example used fewer entries. Confirm that every entry must remain, or explain any separately intended filtering.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": true,
+      "comment_prompt": "Entries were repeatedly fixed in the request, but a later example used fewer entries. Confirm that every entry must remain, or explain any separately intended filtering.",
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": true,
+      "clarification_group": "fixed_entries"
+    },
+    {
+      "id": "CALL-020",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Research exit changes that reduce losses and preserve winners",
+      "problem": "The client is manually trying indicators and exit rules and wants AI to perform the research and comparison work.",
+      "requested_outcome": "Explore approved indicators, exit conditions, stops, trailing stops and targets after the fixed entries, seeking smaller losses while retaining profitable runs where possible.",
+      "source_classification": [
+        "explicit_request"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 12,
+          "time_range": "00:48:49–00:53:20",
+          "summary": "The client asked AI to explore indicators and exits that reduce losses while allowing profitable moves to continue.",
+          "precision": "Approximate section range"
+        },
+        {
+          "section": 13,
+          "time_range": "00:53:20–00:57:50",
+          "summary": "The client invited experiments with different indicators and exit conditions.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "List each candidate’s allowed changes and the reason for trying them.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Evaluate candidates using the same baseline data and assumptions, including unsuccessful attempts.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Keep proposed changes as research drafts for review before adopting them in live strategies.",
+          "basis": "inferred_guardrail_for_approval"
+        }
+      ],
+      "dependencies": [
+        "CALL-019"
+      ],
+      "decision_needed": null,
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-021",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Evaluate the 80% / 20% / 100% aspiration",
+      "problem": "The client described desired effects on winning and losing trades; feasibility has not been established.",
+      "requested_outcome": "On an agreed fixed dataset, aim to leave at least 80% of baseline winners unaffected, allow up to 20% to be affected, and change exits for all baseline losers so losses are reduced. Report feasibility and trade-offs.",
+      "source_classification": [
+        "explicit_aspirational_target"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 12,
+          "time_range": "00:48:49–00:53:20",
+          "summary": "The client described the 80% winner-preservation, 20% affected-winner and 100% losing-trade aspiration.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Agree what unaffected, affected and loss reduced mean before measuring them.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Show original winners preserved or changed, and original losers improved, unchanged or worsened, with counts and percentages.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Report whether the aspiration was achieved and the best observed trade-off if it was not.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-019"
+      ],
+      "decision_needed": "Define unaffected, affected and loss reduced, and state the acceptable trade-off if the 80% / 20% / 100% aspiration is not feasible.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": true,
+      "comment_prompt": "Define unaffected, affected and loss reduced, and state the acceptable trade-off if the 80% / 20% / 100% aspiration is not feasible.",
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": true,
+      "clarification_group": "metric_definitions"
+    },
+    {
+      "id": "CALL-022",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Show a repeatable comparison with the original strategy",
+      "problem": "The client wants measured improvement and an explanation of changes, not just suggestions for indicators.",
+      "requested_outcome": "Compare the original strategy and each candidate using return or ROI, win rate, risk/reward and individual changed outcomes on the same sample.",
+      "source_classification": [
+        "explicit_requested_output",
+        "illustrative_example_in_call"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 13,
+          "time_range": "00:53:20–00:57:50",
+          "summary": "The client wanted an explained comparison showing whether overall return, win rate and risk/reward improved.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Show original and candidate metrics with the period, dataset and calculation assumptions.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Show which outcomes improved, worsened or stayed the same while preserving fixed entries.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Use consistent cost and slippage assumptions, and test a separate period where sufficient data is available.",
+          "basis": "inferred_guardrail_for_approval"
+        },
+        {
+          "text": "Report no improvement when appropriate and make unsuccessful attempts visible.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-011",
+        "CALL-019",
+        "CALL-020",
+        "CALL-021"
+      ],
+      "decision_needed": "Clarify the smaller entry-count example. The example of 1:2 risk/reward and a win rate above 50% is not a fixed target.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": true,
+      "comment_prompt": "Confirm how the smaller entry-count example should be interpreted while preserving the agreed entry rules.",
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": true,
+      "clarification_group": "fixed_entries"
+    },
+    {
+      "id": "CALL-023",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Deliver the reusable skill and ready-made prompt",
+      "problem": "The client should not need to create a technical prompt for every improvement request.",
+      "requested_outcome": "Package the agreed improvement workflow as a runnable skill with a ready-made prompt and simple instructions.",
+      "source_classification": [
+        "developer_commitment"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 12,
+          "time_range": "00:48:49–00:53:20",
+          "summary": "The developer offered a reusable skill and ready-made prompt.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Provide a saved skill or prompt that collects the required strategy and data and preserves the agreed entry lock.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Explain where to run it and demonstrate a complete run through to the comparison report.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [
+        "CALL-019",
+        "CALL-020",
+        "CALL-021",
+        "CALL-022"
+      ],
+      "decision_needed": null,
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-024",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Send a one-strategy pilot for feedback",
+      "problem": "The client has an existing strategy available to try the proposed improvement workflow.",
+      "requested_outcome": "Deliver a pilot for one agreed strategy, let the client try the chat or skill flow, and collect feedback before expanding it.",
+      "source_classification": [
+        "developer_commitment",
+        "client_agreement"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 13,
+          "time_range": "00:53:20–00:57:50",
+          "summary": "The developer offered to send a one-strategy pilot, and the client said a strategy was already available to try.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Agree the pilot strategy privately and demonstrate its complete workflow with plain instructions.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Record feedback and whether the experience meets the client’s improvement needs.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Keep pilot results clearly separate from live trading.",
+          "basis": "inferred_guardrail_for_approval"
+        }
+      ],
+      "dependencies": [
+        "CALL-018",
+        "CALL-023",
+        "CALL-015"
+      ],
+      "decision_needed": "Confirm the exact pilot strategy version, history period, dataset and baseline settings.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": true,
+      "comment_prompt": "Confirm the exact pilot strategy version, history period, dataset and baseline settings.",
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": true,
+      "clarification_group": "comparison_dataset"
+    },
+    {
+      "id": "CALL-025",
+      "category": "AI strategy improvement",
+      "priority": "P2",
+      "title": "Reduce repeated manual strategy experiments",
+      "problem": "The client repeats exit experiments and backtests and wants the system to take over this repetitive research.",
+      "requested_outcome": "Reuse the workflow across approved strategies and measure the manual effort and elapsed time it saves.",
+      "source_classification": [
+        "explicit_desired_outcome",
+        "efficiency_aspiration"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 13,
+          "time_range": "00:53:20–00:57:50",
+          "summary": "The client described repeated manual backtests and hoped the system could reduce an improvement cycle to a day or a few days.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Measure the pilot’s elapsed time and the manual steps it replaces.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Run the next strategy without rewriting the research instructions.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Agree a limit for experiments and a progress update so research does not continue indefinitely.",
+          "basis": "inferred_guardrail_for_approval"
+        }
+      ],
+      "dependencies": [
+        "CALL-023",
+        "CALL-024"
+      ],
+      "decision_needed": "The hoped-for one-day or few-day cycle is an aspiration; agree a measurable pilot target.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-026",
+      "category": "AI capability and model routing",
+      "priority": "P2",
+      "title": "Demonstrate the current Jarvis chat capability",
+      "problem": "The developer said the intelligence already existed in chat, while the client had not yet seen practical AI use in this workflow.",
+      "requested_outcome": "Demonstrate the current chat with a selected strategy and real available history, separating what works now from the proposed improvement workspace.",
+      "source_classification": [
+        "existing_capability_claim",
+        "developer_suggestion",
+        "inferred_verification_task"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 12,
+          "time_range": "00:48:49–00:53:20",
+          "summary": "The developer suggested trying the existing Jarvis chat and said the intelligence was already available.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Show an answer grounded in the chosen strategy and its data rather than generic advice.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Identify missing analysis or reporting capabilities and connect them to the pilot work.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [],
+      "decision_needed": "Verify the existing capability before treating it as delivered.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "CALL-027",
+      "category": "AI capability and model routing",
+      "priority": "P2",
+      "title": "Verify the claimed Astra 6 and Fable 5.1 adoption",
+      "problem": "The developer said these models had already been incorporated, but the call provided no configuration or run evidence.",
+      "requested_outcome": "Verify that adoption claim in the intended product or workflow and show which model actually handles each relevant capability.",
+      "source_classification": [
+        "claimed_already_done",
+        "inferred_verification_task"
+      ],
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "section": 11,
+          "time_range": "00:44:18–00:48:49",
+          "summary": "The developer named Astra 6 and Fable 5.1 and said they had already been incorporated.",
+          "precision": "Approximate section range"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Check the configured and actually used model identities and demonstrate a relevant successful invocation of each.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Distinguish development tools from the customer-facing platform and chat.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Report anything unavailable or unverified rather than treating a conversational claim as proof.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [],
+      "decision_needed": "Verify model adoption separately from the previously requested tracker-routing policy.",
+      "timing": null,
+      "revision": 1,
+      "comments_needed": false,
+      "comment_prompt": null,
+      "source": {
+        "kind": "call",
+        "label": "Client call",
+        "scope": "Call requirements"
+      },
+      "clarification_required": false,
+      "clarification_group": null
+    },
+    {
+      "id": "ROUTE-001",
+      "revision": 1,
+      "category": "AI capability and model routing",
+      "priority": "P1",
+      "title": "Verify the existing tracker’s model policy across both tools",
+      "problem": "Earlier instructions asked the tracker to use Fable 5.1 and GPT-6 Astra together, continue through genuine availability limits, and behave consistently in Codex and Claude Code.",
+      "requested_outcome": "Verify the existing tracker work: prefer Fable 5.1 and GPT-6 Astra together. Select the next-best model automatically only when a preferred model is actually unavailable or rate-limited, not for convenience while it remains usable. Keep the workflow and result checks consistent in Codex and Claude Code.",
+      "source_classification": [
+        "prior_user_instruction",
+        "verify_existing_tracker_work"
+      ],
+      "source": {
+        "kind": "prior_user_instruction",
+        "label": "Earlier tracker discussion, outside this call",
+        "scope": "Verify existing tracker work"
+      },
+      "scope": "verify existing tracker work",
+      "approval_status": "pending_review",
+      "implementation_status": "Awaiting verification",
+      "observed_incident": null,
+      "hypothesized_causes": [],
+      "proposed_approaches": [],
+      "evidence": [
+        {
+          "summary": "The user asked for both preferred models, automatic fallback only for genuine model unavailability or limits, and a similar workflow in Codex and Claude Code.",
+          "source_label": "Earlier user instructions, not the call transcript"
+        }
+      ],
+      "acceptance_checks": [
+        {
+          "text": "Verify the configured model identities and show both preferred models taking part in their intended roles when available.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Demonstrate fallback for a real or controlled availability/rate-limit failure; record which preferred model was unavailable and why the alternative was selected.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Confirm the tracker does not choose an alternative merely for convenience while the preferred model is usable, and returns to the preferred model when it becomes usable.",
+          "basis": "proposed_verification"
+        },
+        {
+          "text": "Run the same representative tracker task in Codex and Claude Code and compare the workflow, checkpoints and completed result.",
+          "basis": "proposed_verification"
+        }
+      ],
+      "dependencies": [],
+      "decision_needed": "Confirm any remaining role or fallback-order choices against the existing tracker configuration. The requested names are preferences; their exact model IDs and current availability still need verification.",
+      "comments_needed": false,
+      "comment_prompt": null,
+      "timing": null,
+      "clarification_required": false,
+      "clarification_group": null
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-001",
+      "title": "Defer the unspecified UI requests",
+      "detail": "The client deferred several UI points while reliability and backtesting remained unresolved. Their details still need a separate discussion.",
+      "related_requirements": [
+        "CALL-009",
+        "CALL-015",
+        "CALL-016"
+      ],
+      "status": "recorded_in_call",
+      "comments_needed": false
+    },
+    {
+      "id": "DEC-002",
+      "title": "Allow time for proper review",
+      "detail": "A change may be delayed by a day when it needs more impact review or testing. This is flexibility for a particular change.",
+      "related_requirements": [
+        "CALL-007",
+        "CALL-008"
+      ],
+      "status": "recorded_in_call",
+      "comments_needed": false
+    },
+    {
+      "id": "DEC-003",
+      "title": "Clarify the fixed-entry example",
+      "detail": "Entries were repeatedly fixed in the request, but a later example used fewer entries. Confirm that every entry must remain, or explain any separately intended filtering.",
+      "related_requirements": [
+        "CALL-019",
+        "CALL-022"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": true
+    },
+    {
+      "id": "DEC-004",
+      "title": "Define the improvement targets",
+      "detail": "Define unaffected, affected and loss reduced, and state the acceptable trade-off if the 80% / 20% / 100% aspiration is not feasible.",
+      "related_requirements": [
+        "CALL-021"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": true
+    },
+    {
+      "id": "DEC-005",
+      "title": "Agree the pilot and final interface",
+      "detail": "Should the pilot be the first step toward a dedicated improvement tab, or is the skill/chat experience sufficient?",
+      "related_requirements": [
+        "CALL-018",
+        "CALL-023",
+        "CALL-024"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": true
+    },
+    {
+      "id": "DEC-006",
+      "title": "Agree the comparison dataset",
+      "detail": "Confirm the exact strategy versions, comparison report, period, data and settings from the private source records.",
+      "related_requirements": [
+        "CALL-011",
+        "CALL-012",
+        "CALL-014",
+        "CALL-024"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": true
+    },
+    {
+      "id": "DEC-007",
+      "title": "Agree current owners and dates",
+      "detail": "The call’s today, evening and Monday references are historical. Confirm current status, owners and the next dates.",
+      "related_requirements": [
+        "CALL-009",
+        "CALL-015",
+        "CALL-016",
+        "CALL-017"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": false
+    },
+    {
+      "id": "DEC-008",
+      "title": "Review the added verification safeguards",
+      "detail": "Review the proposed checks for consistent data and costs, separate-period testing where possible, research drafts, and checking open positions before maintenance.",
+      "related_requirements": [
+        "CALL-010",
+        "CALL-019",
+        "CALL-020",
+        "CALL-022",
+        "CALL-024"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": false
+    },
+    {
+      "id": "DEC-009",
+      "title": "Investigate before choosing a technical fix",
+      "detail": "Shared processing, update timing and position matching were suggested explanations. Verify the cause before selecting the design.",
+      "related_requirements": [
+        "CALL-001",
+        "CALL-002",
+        "CALL-004",
+        "CALL-005"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": false
+    },
+    {
+      "id": "DEC-010",
+      "title": "Keep past operating actions as context",
+      "detail": "Past pauses and account changes describe the incident history; they are not new operating instructions.",
+      "related_requirements": [],
+      "status": "context",
+      "comments_needed": false
+    },
+    {
+      "id": "DEC-011",
+      "title": "Keep illustrative metrics as examples",
+      "detail": "The example of 1:2 risk/reward and a win rate above 50% is not an agreed target. Illustrative trade counts do not override the entry lock.",
+      "related_requirements": [
+        "CALL-019",
+        "CALL-022"
+      ],
+      "status": "context",
+      "comments_needed": false
+    },
+    {
+      "id": "DEC-012",
+      "title": "Separate adoption from routing",
+      "detail": "Verify the call’s model-adoption claim separately from the earlier tracker-routing instruction in ROUTE-001.",
+      "related_requirements": [
+        "CALL-027",
+        "ROUTE-001"
+      ],
+      "status": "needs_confirmation",
+      "comments_needed": false
+    }
+  ],
+  "tracker_overlay": {
+    "verified_snapshot_at": "2026-09-05T14:33:00+05:30",
+    "summary": "Verified development links. Merged work still needs revalidation against the requested outcome.",
+    "links": [
+      {
+        "requirements": [
+          "CALL-013"
+        ],
+        "rows": [
+          384,
+          387
+        ],
+        "prs": [
+          685,
+          686
+        ],
+        "status": "Merged, revalidation needed",
+        "review_status": "revalidation_needed",
+        "summary": "History and selection work is linked. Verify the full user workflow before accepting the requirement."
+      },
+      {
+        "requirements": [
+          "CALL-002",
+          "CALL-004",
+          "CALL-005"
+        ],
+        "rows": [
+          385
+        ],
+        "prs": [
+          685
+        ],
+        "status": "Merged, revalidation needed",
+        "review_status": "revalidation_needed",
+        "summary": "Similar-strategy entry work is linked. Recheck the complete scenario set."
+      },
+      {
+        "requirements": [
+          "CALL-001",
+          "CALL-005",
+          "CALL-006"
+        ],
+        "rows": [
+          382,
+          383,
+          386
+        ],
+        "prs": [
+          688
+        ],
+        "status": "Open, in progress",
+        "review_status": "linked_in_progress",
+        "summary": "Stop, restart and position-matching work is in progress. Check its coverage against the call."
+      },
+      {
+        "requirements": [],
+        "rows": [
+          370,
+          377,
+          389
+        ],
+        "prs": [
+          687
+        ],
+        "status": "Merged, revalidation needed",
+        "review_status": "context_only",
+        "summary": "Adjacent chart correction from the existing tracker; it is not a new call requirement."
+      }
+    ]
+  },
+  "counts": {
+    "call_requirements": 27,
+    "prior_instruction_requirements": 1,
+    "total_requirements": 28,
+    "decisions": 12,
+    "comments_needed": 7,
+    "clarification_groups": 4
+  },
+  "prepared_date_label": "Prepared 5 September 2026",
+  "recording_date": null,
+  "recording_date_verified": false
+}
